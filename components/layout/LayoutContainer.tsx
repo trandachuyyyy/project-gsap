@@ -33,6 +33,8 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
         return () => clearTimeout(timeout);
     }, []);
 
+
+
     if (showSplash) {
         return (
             <div className="splash-container" style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>

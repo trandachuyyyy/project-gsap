@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const SesionProject = ({ className }: { className: string }) => {
+const SesionProject = ({ className, ...props }: { className: string }) => {
     const projects = [
         {
             name: 'Project 1',

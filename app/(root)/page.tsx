@@ -8,8 +8,8 @@ import SesionSkills from './components/SesionSkills'
 const Page = () => {
 
     return (
-        <div className='h-full py-4  flex flex-col gap-8 bg-gray-100 '>
-            <SesionHome className='px-8 ' />
+        <div data-hero className='py-4 h-full flex flex-col gap-8 bg-gray-100 '>
+            <SesionHome className='px-8  content ' />
             <SesionAbout className='px-8' />
             <SesionSkills className='px-8' />
             <SesionProject className='px-8' />

@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react"
 gsap.registerPlugin(ScrollTrigger)
 
-const SesionSkills = ({ className }: { className: string }) => {
+const SesionSkills = ({ className, ...props }: { className: string }) => {
     const skils = [
         'React',
         'Nextjs',
@@ -52,7 +52,7 @@ const SesionSkills = ({ className }: { className: string }) => {
             <h1 className='w-full text-start  px-8 py-2'>
                 My Practical Skills
             </h1>
-            <div className={`flex shadow-xl  items-start justify-center bg-gray-500 rounded-br-full rounded-bl-full overflow-hidden`} >
+            <div className={`shadow-xl w-full bg-gray-500 rounded-br-full rounded-bl-full overflow-hidden`} >
                 <div ref={triggerRef} className="flex gap-2 mx-16 justify-center my-32 ">
                     {skils.map((e, index) => {
                         return (
