@@ -12,7 +12,6 @@ const SesionAbout = ({ className }: { className: string }) => {
             pin: true,
             start: 'top top',
             end: `10%`,
-
         })
 
         let tl = gsap.timeline();
