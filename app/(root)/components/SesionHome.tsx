@@ -43,6 +43,30 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
             }
         );
     }, []);
+
+    useEffect(() => {
+        const elements = document.querySelectorAll('.box-content');
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: textRef.current,
+                start: 'top center',
+                end: 'bottom -80%',
+                scrub: 2,
+            }
+        });
+
+        tl.fromTo(elements, {
+            borderTopLeftRadius: '0%',
+            borderTopRightRadius: '0%',
+            duration: 5,
+            ease: 'power1.inOut',
+        }, {
+            borderTopLeftRadius: '500px',
+            borderTopRightRadius: '500px',
+            ease: 'power3.out',
+        },
+        );
+    }, []);
     return (
         <div className="">
             <div className={`flex flex-col gap-8 ${className}`} ref={textRef} >
@@ -57,7 +81,7 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
                     </h1>
                 </div>
             </div>
-            <div className={`flex shadow-xl items-start justify-center bg-gray-500 rounded-tr-full rounded-tl-full overflow-hidden mt-8`} >
+            <div className={`flex box-content shadow-xl items-start justify-center bg-gray-500 overflow-hidden mt-8`} >
                 <div className="lg:w-[70%] w-1/2 my-auto lg:ml-24 ml-16">
                     <div className='uppercase leading-1 text-justify  lg:text-2xl text-sm  font-bold box-decoration-clone bg-gradient-to-r from-gray-600 to-gray-200 text-white px-2'>
                         {`Hi, I'm Huy Tran`}

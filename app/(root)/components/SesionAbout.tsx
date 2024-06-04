@@ -2,38 +2,29 @@
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useEffect } from 'react'
+import { Draggable } from 'gsap/Draggable';
+
 gsap.registerPlugin(ScrollTrigger)
 const SesionAbout = ({ className }: { className: string }) => {
     useEffect(() => {
-        const textWrapers = document.querySelectorAll('.text-about-animation')
-
-        const pinTrigger = ScrollTrigger.create({
-            trigger: '.content-about',
-            pin: true,
-            start: 'top top',
-            end: `10%`,
-        })
-
-        let tl = gsap.timeline();
-
-
-        tl.to(textWrapers, {
-            translateX: '-170%',
-            scrollTrigger: {
-                start: () => pinTrigger.start,
-                end: () => pinTrigger.end,
-                scrub: 5,
-                // markers: true, // Add markers for debugging
+        const textElement = document.querySelectorAll('.text-about-animation')
+        gsap.fromTo(
+            textElement,
+            { x: '0%' }, // Bắt đầu từ vị trí bên trái
+            {
+                x: '-170%', // Kết thúc ở vị trí chuẩn
+                duration: 5,
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: '.content-about',
+                    start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
+                    end: 'bottom bottom', // Kết thúc khi cuộn đến giữa dưới của phần tử
+                    scrub: 5, // Hiệu ứng kéo theo scroll
+                    // markers: true, // Hiển thị markers để kiểm tra
+                    onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
+                },
             }
-            ,
-            ease: 'power1.inOut',
-        })
-
-        return () => {
-            pinTrigger.kill();
-            tl.kill();
-        }
-
+        );
     }, [])
     return (
         <div className='content-about flex flex-col gap-8  overflow-hidden'>
