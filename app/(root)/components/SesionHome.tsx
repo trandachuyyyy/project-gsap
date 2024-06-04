@@ -58,19 +58,19 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
                 </div>
             </div>
             <div className={`flex shadow-xl items-start justify-center bg-gray-500 rounded-tr-full rounded-tl-full overflow-hidden mt-8`} >
-                <div className="w-[70%] my-auto ml-24">
-                    <div className='uppercase leading-1 text-justify text-2xl font-bold box-decoration-clone bg-gradient-to-r from-gray-600 to-gray-200 text-white px-2'>
+                <div className="lg:w-[70%] w-1/2 my-auto lg:ml-24 ml-16">
+                    <div className='uppercase leading-1 text-justify  lg:text-2xl text-sm  font-bold box-decoration-clone bg-gradient-to-r from-gray-600 to-gray-200 text-white px-2'>
                         {`Hi, I'm Huy Tran`}
                     </div>
-                    <div className='text-justify text-white font-semibold text-2xl pr-2 leading-1'>
+                    <div className='lg:text-justify text-start text-white lg:font-semibold font-medium lg:text-2xl text-xs pr-2 leading-1 lg:mt-0 mt-2'>
                         I like to learn new technology especially about effects,
                         cartoon. I always want to create new things,
                         unique experiences, I try to dedicate my work to new directions
                         Vision for each project, always putting quality first.
                     </div>
                 </div>
-                <div className="w-[30%] flex">
-                    <div className="h-[350px] w-full overflow-hidden">
+                <div className="lg:w-[30%] w-1/2">
+                    <div className="lg:h-[350px] h-[300px] w-full overflow-hidden">
                         <Image
                             width={400}
                             height={500}

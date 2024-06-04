@@ -74,8 +74,8 @@ const Header = () => {
                 </div>
             </div>
             <div className='logo-container'>
-                <h1 className="logo fixed top-0 translate-y-1/2 p-4 left-1/2 -translate-x-1/2 z-[1000]">
-                    {`HI, I'M  FRONTEND DEVELOPER`}
+                <h1 className="logo fixed lg:text-2xl text-sm top-0 translate-y-1/2 p-4 left-1/2 -translate-x-1/2 z-[1000]">
+                    {`HUY TRAN`}
                 </h1>
             </div>
             <div className="container w-full h-screen bg-gray-100">
