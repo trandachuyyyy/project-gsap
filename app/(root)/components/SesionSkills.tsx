@@ -39,6 +39,7 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
                     scrub: 5, // Hiệu ứng kéo theo scroll
                     // markers: true, // Hiển thị markers để kiểm tra
                     onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
+
                 },
             }
         );
@@ -71,6 +72,34 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
                 duration: 2, // Thời gian hiệu ứng
             }, "-=3"); // Bắt đầu sau 0.5 giây
     }, [])
+
+
+    useEffect(() => {
+        const textElement = document.querySelectorAll('.box-skills')
+        gsap.fromTo(
+            textElement,
+            {
+                borderRadius: '0%',
+                opacity: 0.5
+            }, // Bắt đầu từ vị trí bên trái
+            {
+                duration: 5,
+                opacity: 1,
+                borderRadius: '16px',
+                ease: 'power1.inOut',
+                scrollTrigger: {
+                    trigger: '.box-bgc',
+                    start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
+                    end: 'top', // Kết thúc khi cuộn đến giữa dưới của phần tử
+                    scrub: 5, // Hiệu ứng kéo theo scroll
+                    // markers: true, // Hiển thị markers để kiểm tra
+                    onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
+                },
+            }
+        );
+
+    }, [])
+
     useEffect(() => {
         const elements = document.querySelectorAll('.text-gray-200') as NodeListOf<HTMLElement>;
 
@@ -122,7 +151,7 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
                 <div ref={triggerRef} className="flex gap-2 mx-16 justify-center my-32 ">
                     {skils.map((e, index) => {
                         return (
-                            <div key={index} className='text-gray-200 cursor-grab  border min-w-[170px] h-fit text-center font-semibold text-xl px-4 py-2 rounded-2xl'>
+                            <div key={index} className='text-gray-200 cursor-grab box-skills  border min-w-[170px] h-fit text-center font-semibold text-xl px-4 py-2'>
                                 {e}
                             </div>
                         )

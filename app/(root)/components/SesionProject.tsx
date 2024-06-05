@@ -1,6 +1,10 @@
-import Image from 'next/image'
-import React from 'react'
+'use client'
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 
+gsap.registerPlugin(ScrollTrigger);
 const SesionProject = ({ className, ...props }: { className: string }) => {
     const projects = [
         {
@@ -47,6 +51,32 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
         },
 
     ]
+    const projectsRef = useRef<any>([]);
+
+    useEffect(() => {
+        projectsRef.current.forEach((el: any, index: any) => {
+            gsap.fromTo(el, {
+                opacity: 0,
+                y: 50,
+                // rotateY: -90, // Rotate element initially to hide it
+                transformOrigin: "center center", // Set transform origin to center
+
+            }, {
+                // rotateY: 0, // Rotate back to normal state
+                opacity: 1,
+                y: 0,
+                duration: 2,
+                ease: 'power4.out',
+                delay: index * 0.2,  // Stagger effect
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%',
+                    end: 'top 60%',
+                    toggleActions: 'play none none reverse', // Run the animation again when scrolling back
+                },
+            });
+        });
+    }, []);
     return (
         <div className={`flex flex-col gap-8 ${className}`}>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Project</h1>
@@ -55,9 +85,9 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
             </h1>
             <div className={`bg-gray-100 flex w-full flex-wrap gap-4  justify-center`} >
                 {
-                    projects.map(e => {
+                    projects.map((e: any, index: any) => {
                         return <>
-                            <div key={e.name} className="h-72 w-[30%] relative bg-gray-500  rounded-2xl">
+                            <div ref={(el: any) => projectsRef.current[index] = el} key={e.name} className="h-72 w-[30%] relative bg-gray-500  rounded-2xl">
                                 <Image
                                     src={e.image}
                                     width={1280}
