@@ -141,7 +141,7 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                         projects.map((e: any, index: any) => {
                             return (
                                 <div ref={(el: any) => projectsRef.current[index] = el} key={e.name} className="col-span-1">
-                                    <div className="flex  lg:divide-x divide-y lg:flex-row flex-col gap-2 w-full bg-white rounded-3xl p-2">
+                                    <div className="flex  lg:divide-x lg:divide-y-0 divide-y lg:flex-row flex-col gap-2 w-full bg-white rounded-3xl p-2">
                                         <div className=" bg-gray-200 relative min-w-[50%] group lg:w-1/2 w-full rounded-2xl ">
                                             <div className="w-full h-56 mx-auto my-auto overflow-hidden rounded-2xl">
                                                 <Image
@@ -181,12 +181,12 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                                                     return (
                                                         <div
                                                             key={index}
-                                                            className='size-8'
+                                                            className='size-5'
                                                             style={{
                                                                 position: 'absolute',
                                                                 zIndex: index * 10,
                                                                 transform: `translateX(-${50 * index}%)`,
-                                                                left: `${index * 35}px`,
+                                                                left: `${index * 22}px`,
                                                             }}
                                                         >
                                                             <Image

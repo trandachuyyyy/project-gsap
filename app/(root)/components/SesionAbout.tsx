@@ -13,11 +13,14 @@ const SesionAbout = ({ className }: { className: string }) => {
             {
                 borderRadius: '0%',
                 height: '0px',
-            }, // Bắt đầu từ vị trí bên trái
+                opacity: 0.5,
+            },
             {
                 duration: 5,
+                opacity: 1,
                 height: '100%',
-                borderRadius: '2%',
+                borderRadius: '1%',
+                borderTop: '5px solid black',
                 ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.content-about',
@@ -60,7 +63,7 @@ const SesionAbout = ({ className }: { className: string }) => {
             <div className={`bg-gray-100 text-about-animation`} >
                 <div className='grid lg:grid-cols-3 grid-cols-1 gap-4  py-4 '>
                     {arrayAbout.map((item, index) => (
-                        <div key={index} className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
+                        <div key={index} className={`bg-gray-200 border-t-2 border-gray-400 box-about  w-1/2 min-w-fit  p-8 `}>
                             <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
                                 {item}
                             </h1>

@@ -1,12 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import Header from './Header'
-import Footer from './Footer'
+import { useResize } from '@/hooks/useResize'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useResize } from '@/hooks/useResize'
+import React, { useEffect, useState } from 'react'
+import Footer from './Footer'
+import Header from './Header'
 gsap.registerPlugin(ScrollTrigger)
 
 const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
@@ -18,17 +18,10 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
 
         if (showSplash) {
             timeline.fromTo('.splash-text', { y: '0%', opacity: 1 }, { y: '-300%', opacity: 1, duration: 1 })
-                // .to('.splash-background', { height: '50%', borderBottomLeftRadius: '500px', borderBottomRightRadius: '500px', duration: 2, delay: -1 })
                 .to('.splash-background-2', { bottom: '-50%', duration: 1, delay: -1 })
                 .to('.splash-text', { y: '-800%', opacity: 0, duration: 0.49, delay: 0 }, 1)
                 .to('.splash-background-2', { bottom: '0%', borderRadius: 0, duration: 0.5, delay: 0 }, 1)
-            // .to('.splash-background-2', { bottom: '0%', height: '100%', borderTopRightRadius: '500px', borderTopLeftRadius: '500px', duration: 2, delay: -1 })
-            // .to('.splash-background', { height: '0%', duration: 2, delay: -1 })
-
-            // .to('.splash-background', { y: '-300%', duration: 2, delay: -1 })
-            // .set('.splash-container', { display: 'none' }) // Ẩn splash
-            // .to('.splash-background', { y: '-800%', duration: 2, delay: -1 })
-            // .set('.splash-background', { zIndex: -1 }); // Đẩy background lên sau khi ẩn splash
+                .set('.splash-container', { display: 'none' }) // Ẩn splash
         }
     }, [showSplash])
 
@@ -79,7 +72,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
         return (
             <div className="splash-container" style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
                 <div className="splash-background bg-gray-200" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}></div>
-                <div className="splash-background-2 bg-white rounded-tl-[100%] rounded-tr-[100%] translate-x-[-7%]" style={{ position: 'absolute', bottom: '-100%', left: 0, width: '120vw', height: '100%', zIndex: 1 }}></div>
+                <div className={`splash-background-2 bg-white ${isVisibleMobile ? 'rounded-tl-[70%] rounded-tr-[70%]' : "rounded-tl-[100%] rounded-tr-[100%]"} translate-x-[-7%]`} style={{ position: 'absolute', bottom: '-100%', left: 0, width: '120vw', height: '100%', zIndex: 1 }}></div>
                 <div className="splash-text uppercase text-black font-bold lg:text-[48px] text-2xl" style={{ zIndex: 3, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', }}>Huy tran</div>
             </div>
         )

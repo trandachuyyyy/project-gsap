@@ -34,7 +34,7 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
             triggerRef.current,
             { x: isVisibleMobile ? '-70%' : '33%' }, // Bắt đầu từ vị trí bên trái
             {
-                x: isVisibleMobile ? '0%' : '-35 %', // Kết thúc ở vị trí chuẩn
+                x: isVisibleMobile ? '0%' : '-35%', // Kết thúc ở vị trí chuẩn
                 duration: 5,
                 ease: 'power1.inOut',
                 scrollTrigger: {
@@ -56,24 +56,24 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
             scrollTrigger: {
                 trigger: '.box-bgc',
                 start: 'top center',
-                end: 'bottom',
+                end: 'bottom end',
                 scrub: 2,
             }
         });
 
         tl.fromTo('.box-bgc', {
-            borderBottomLeftRadius: '0%',
-            borderBottomRightRadius: '0%',
+            // borderBottomLeftRadius: '0%',
+            // borderBottomRightRadius: '0%',
             duration: 5,
             ease: 'power1.inOut',
         }, {
-            borderBottomLeftRadius: '500px',
-            borderBottomRightRadius: '500px',
+            borderBottomLeftRadius: '0px',
+            borderBottomRightRadius: '0px',
             ease: 'power3.out',
         })
             .to('.box-bgc', { // Thêm bước mới vào timeline
-                borderBottomLeftRadius: '500px',
-                borderBottomRightRadius: '500px',
+                // borderBottomLeftRadius: '500px',
+                // borderBottomRightRadius: '500px',
                 duration: 2, // Thời gian hiệu ứng
             }, "-=3"); // Bắt đầu sau 0.5 giây
     }, [])
