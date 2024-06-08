@@ -17,7 +17,7 @@ const SesionAbout = ({ className }: { className: string }) => {
             {
                 duration: 5,
                 height: '100%',
-                borderRadius: '5%',
+                borderRadius: '2%',
                 ease: 'power1.inOut',
                 scrollTrigger: {
                     trigger: '.content-about',
@@ -48,13 +48,25 @@ const SesionAbout = ({ className }: { className: string }) => {
         //     }
         // );
     }, [])
+    const arrayAbout = [
+        'I have regularly worked with react and the nextjs framework since graduating and now I have been working with it for about 2 years.',
+        'I often research and self-study about technology, this page was also built when I learned about the Gsap library.',
+        'Please experience this page and leave me comments I will try to fix and develop in the future.'
+    ]
     return (
-        <div className='content-about flex flex-col gap-8  overflow-hidden'>
+        <div id='ss-about' className='content-about flex flex-col gap-8  overflow-hidden'>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>About</h1>
             <h1 className='w-full text-start  px-8 py-2'>Something about me</h1>
             <div className={`bg-gray-100 text-about-animation`} >
-                <div className='grid grid-cols-3 gap-4  py-4 '>
-                    <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
+                <div className='grid lg:grid-cols-3 grid-cols-1 gap-4  py-4 '>
+                    {arrayAbout.map((item, index) => (
+                        <div key={index} className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
+                            <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
+                                {item}
+                            </h1>
+                        </div>
+                    ))}
+                    {/* <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
                         <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
                             I have regularly worked with react and the nextjs framework since graduating and now I have been working with it for about 2 years.
                         </h1>
@@ -66,9 +78,9 @@ const SesionAbout = ({ className }: { className: string }) => {
                     </div>
                     <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
                         <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
-                            Please experience this page and leave me comments I will try to fix and develop in the future
+                            Please experience this page and leave me comments I will try to fix and develop in the future.
                         </h1>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>

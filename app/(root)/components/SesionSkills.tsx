@@ -1,5 +1,6 @@
 'use client'
 
+import { useResize } from "@/hooks/useResize";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react"
@@ -21,15 +22,19 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
         'Css',
         'Sass',
     ]
+
     const sessionRef = useRef(null);
+
     const triggerRef = useRef(null);
+
+    const { isVisibleMobile } = useResize()
 
     useEffect(() => {
         gsap.fromTo(
             triggerRef.current,
-            { x: '33%' }, // Bắt đầu từ vị trí bên trái
+            { x: isVisibleMobile ? '-70%' : '33%' }, // Bắt đầu từ vị trí bên trái
             {
-                x: '-35%', // Kết thúc ở vị trí chuẩn
+                x: isVisibleMobile ? '0%' : '-35 %', // Kết thúc ở vị trí chuẩn
                 duration: 5,
                 ease: 'power1.inOut',
                 scrollTrigger: {
@@ -142,16 +147,16 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
 
 
     return (
-        <div ref={sessionRef} className='flex flex-col gap-8'>
+        <div id="ss-skills" ref={sessionRef} className='flex flex-col gap-8'>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Skills</h1>
             <h1 className='w-full text-start  px-8 py-2'>
                 My Practical Skills
             </h1>
             <div className={`shadow-xl box-bgc w-full bg-gray-500 overflow-hidden`} >
-                <div ref={triggerRef} className="flex gap-2 mx-16 justify-center my-32 ">
+                <div ref={triggerRef} className={`flex ${isVisibleMobile ? 'flex-row flex-wrap' : 'flex-row'} gap-2 mx-16 justify-center my-32`}>
                     {skils.map((e, index) => {
                         return (
-                            <div key={index} className='text-gray-200 cursor-grab box-skills  border min-w-[170px] h-fit text-center font-semibold text-xl px-4 py-2'>
+                            <div key={index} className={`text-gray-200 cursor-grab box-skills  border ${isVisibleMobile ? 'min-w-fit w-fit' : ' min-w-[170px]'} h-fit text-center font-semibold text-xl px-4 py-2`}>
                                 {e}
                             </div>
                         )

@@ -3,10 +3,11 @@ import gsap from 'gsap'
 import Image from 'next/image'
 import React, { useEffect, useRef } from 'react'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { useResize } from '@/hooks/useResize'
 gsap.registerPlugin(ScrollTrigger)
 const SesionHome = ({ className, ...props }: { className: string }) => {
     const textRef = useRef<any>(null);
-
+    const { isVisibleMobile } = useResize()
     useEffect(() => {
         const textElement = textRef.current;
 
@@ -78,7 +79,7 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
         );
         tl.fromTo(elementsContent, {
             duration: 5,
-            skewX: '-20deg',
+            skewX: isVisibleMobile ? '-10deg' : '-20deg',
             ease: 'power2.inOut',
         }, {
             skewX: '0deg',
@@ -109,7 +110,7 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
         );
     }, []);
     return (
-        <div className="">
+        <div id='ss-home' className="pt-[140px]">
             <div className={`flex flex-col gap-8 ${className}`} ref={textRef} >
                 <div className="">
                     <h1 className='text-3xl font-black uppercase sm:text-4xl md:text-7xl xl:text-9xl'>
