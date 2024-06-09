@@ -3,17 +3,11 @@ import { useResize } from '@/hooks/useResize'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
-import { useGSAP } from '@gsap/react';
-import { usePathname } from 'next/navigation'
-import { ScrollSmoother } from 'gsap-trial/dist/ScrollSmoother';
 
-if (typeof window !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, useGSAP);
-}
 const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     const queryClient = new QueryClient()
 
