@@ -46,7 +46,7 @@ const Header = () => {
                         gsap.to(scrollToText, { display: 'none', })
                     } else {
                         gsap.to(logo, { display: 'block', });
-                        gsap.to(scrollToText, { display: 'block', });
+                        gsap.to(scrollToText, { display: 'flex', });
                         setHeaderVisible(false);
                     }
                 },
