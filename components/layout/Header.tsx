@@ -21,12 +21,14 @@ const Header = () => {
     useEffect(() => {
         const pinTrigger = gsap.fromTo('.logo', {
             y: "50vh",
-            scale: isVisibleMobile ? 4 : 6,
+            fontSize: '84px',
+            // scale: isVisibleMobile ? 4 : 6,
             yPercent: -50,
             duration: 2,
             ease: "power1.inOut", // Thêm thuộc tính ease
         }, {
-            scale: 1,
+            // scale: 1,
+            fontSize: '52px',
             translateY: '88%',
             scrollTrigger: {
                 trigger: '.content',
