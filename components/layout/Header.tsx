@@ -65,6 +65,32 @@ const Header = () => {
         }
     };
 
+
+    const [lastScrollTop, setLastScrollTop] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                // gsap.to('.nav', { maxHeight: '0px', opacity: 0, duration: 0.5, ease: 'power1.inOut' });
+                setHeaderVisible(false);
+            } else {
+                // Scrolling up
+                // gsap.to('.nav', { maxHeight: '70px', opacity: 1, duration: 0.5, ease: 'power1.inOut' });
+                setHeaderVisible(true);
+            }
+            setLastScrollTop(scrollTop);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [lastScrollTop]);
+
     return (
         <div>
             <div

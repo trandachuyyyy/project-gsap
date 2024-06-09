@@ -54,8 +54,25 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
             width: '100%',
             duration: 5,
             ease: 'power4.out',
-        },
-        );
+        });
+        tl.fromTo('.box-content',
+            {
+                background: 'linear-gradient(to right, #4B5563 0%, #4B5563 100%)',
+            },
+            {
+                background: 'linear-gradient(to right, #4B5563 0%, #D1D5DB 100%)',
+                duration: 5,  // Tăng thời gian hoạt ảnh lên 5 giây
+                ease: 'power1.inOut'  // Sử dụng hàm easing mượt mà hơn
+            });
+        tl.fromTo(elementsContent, {
+            opacity: 0.5,
+            duration: 5,
+            ease: 'power3.inOut',
+        }, {
+            opacity: 1,
+            duration: 5,
+            ease: 'power4.out',
+        });
     }, []);
     useEffect(() => {
         const elements = document.querySelectorAll('.box-image-avatar');
@@ -70,9 +87,11 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
 
         tl.fromTo(elements, {
             borderRadius: 0,
+            opacity: 0.1,
             duration: 5,
             ease: 'power1.inOut',
         }, {
+            opacity: 1,
             borderRadius: '100%',
             ease: 'power3.out',
         },
@@ -93,8 +112,8 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
                     </h1>
                 </div>
             </div>
-            <div className="grid box-content mt-8 lg:grid-cols-2 grid-cols-1 lg:items-center w-full bg-gray-500  lg:h-[350px] h-[500px]">
-                <div className='box-title-name col-span-1 h-fit flex lg:flex-row flex-col gap-2box-decoration-clone bg-gradient-to-r from-gray-600 to-gray-300 text-white p-4 lg:rounded-tr-full lg:rounded-br-full'>
+            <div className="grid box-content mt-8 lg:grid-cols-2 grid-cols-1 lg:divide-y-0 divide-y lg:items-center w-full lg:h-[300px] h-[500px]">
+                <div className='box-title-name col-span-1 h-full items-center lg:border-r-2 flex lg:flex-row flex-col gap-2 box-decoration-clone  text-white p-4 lg:rounded-tr-full lg:rounded-br-full'>
                     <div className="lg:w-[20%] mx-auto w-[150px] h-[150px]">
                         <Image
                             width={400}
@@ -117,7 +136,7 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
                         </h1>
                     </div>
                 </div>
-                <div className='col-span-1 box-tile-content h-fit text-start text-white lg:font-semibold font-medium lg:text-2xl text-xs leading-1 lg:mt-0 mt-2 p-4'>
+                <div className='col-span-1 box-tile-content h-full items-center flex text-start text-black lg:font-semibold font-medium lg:text-2xl text-xs leading-1 lg:mt-0 mt-2 p-4'>
                     I like to learn new technology especially about effects,
                     cartoon. I always want to create new things,
                     unique experiences, I try to dedicate my work to new directions

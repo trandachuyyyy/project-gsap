@@ -12,7 +12,7 @@ const SesionAbout = ({ className }: { className: string }) => {
             textElement,
             {
                 borderRadius: '0%',
-                height: '0px',
+                height: '30%',
                 opacity: 0.5,
             },
             {
@@ -26,7 +26,7 @@ const SesionAbout = ({ className }: { className: string }) => {
                     trigger: '.content-about',
                     start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
                     end: 'top', // Kết thúc khi cuộn đến giữa dưới của phần tử
-                    scrub: 5, // Hiệu ứng kéo theo scroll
+                    scrub: 2, // Hiệu ứng kéo theo scroll
                     // markers: true, // Hiển thị markers để kiểm tra
                     onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
                 },
@@ -59,11 +59,11 @@ const SesionAbout = ({ className }: { className: string }) => {
     return (
         <div id='ss-about' className='content-about flex flex-col gap-8  overflow-hidden'>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>About</h1>
-            <h1 className='w-full text-start  px-8 py-2'>Something about me</h1>
+            <h1 className='w-full lg:text-start text-center  px-8 py-2'>Something about me</h1>
             <div className={`bg-gray-100 text-about-animation`} >
                 <div className='grid lg:grid-cols-3 grid-cols-1 gap-4  py-4 '>
                     {arrayAbout.map((item, index) => (
-                        <div key={index} className={`bg-gray-200 border-t-2 border-gray-400 box-about  w-1/2 min-w-fit  p-8 `}>
+                        <div key={index} className={`bg-gray-200 border-t-2 h-fit col-span-1 border-gray-400 box-about  w-1/2 min-w-fit  p-8 `}>
                             <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
                                 {item}
                             </h1>

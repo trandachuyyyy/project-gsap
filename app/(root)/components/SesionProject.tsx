@@ -1,9 +1,10 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { useResize } from '@/hooks/useResize';
+import { FaAnglesDown } from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 const SesionProject = ({ className, ...props }: { className: string }) => {
@@ -97,7 +98,12 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
 
     const triggerRef = useRef<any>(null);
 
+    const scrollToRef = useRef<any>(null);
+
     const { isVisibleMobile } = useResize()
+
+    const [isHidden, setIsHidden] = useState<boolean>(false);
+
 
     useEffect(() => {
         projectsRef.current.forEach((el: any, index: any) => {
@@ -121,17 +127,28 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                         end: '+=200',
                         scrub: 1,
                         toggleActions: 'play none none reverse',
+                        onEnter: () => {
+                            if (index == 0) {
+                                gsap.to(scrollToRef.current, { opacity: 1, duration: 0.5 });
+                            } else {
+                                gsap.to(scrollToRef.current, { opacity: 0, duration: 0.5 });
+                            }
+                        },
+                        onLeaveBack: () => {
+                            gsap.to(scrollToRef.current, { opacity: 1, duration: 0.5 });
+                        }
                     }
                 }
             );
         });
     }, [projects]);
 
+
     return (
         <div id='ss-project' className={`flex flex-col gap-8`}>
             <div className={` ${className} `}>
                 <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Project</h1>
-                <h1 className='w-full text-start py-2'>
+                <h1 className='w-full lg:text-start text-center py-2'>
                     Implemented projects
                 </h1>
             </div>
@@ -140,7 +157,7 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                     {
                         projects.map((e: any, index: any) => {
                             return (
-                                <div ref={(el: any) => projectsRef.current[index] = el} key={e.name} className="col-span-1">
+                                <div ref={(el: any) => projectsRef.current[index] = el} key={e.name} className="col-span-1 relative">
                                     <div className="flex  lg:divide-x lg:divide-y-0 divide-y lg:flex-row flex-col gap-2 w-full bg-white rounded-3xl p-2">
                                         <div className=" bg-gray-200 relative min-w-[50%] group lg:w-1/2 w-full rounded-2xl ">
                                             <div className="w-full h-56 mx-auto my-auto overflow-hidden rounded-2xl">
@@ -203,12 +220,19 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                                             </div>
                                         </div>
                                     </div>
+                                    {index == 0 &&
+                                        <p ref={scrollToRef}
+                                            className="scroll-to absolute left-1/2 -bottom-10 z-[9999] flex items-center cursor-pointer gap-2 font-mono  lg:text-lg text-xs ">
+                                            Scroll To <FaAnglesDown className='animate-bounce text-sm' />
+                                        </p>
+                                    }
                                 </div>
                             )
 
                         })
                     }
                 </div>
+
             </div>
         </div>
     )

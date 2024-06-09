@@ -32,7 +32,7 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
     useEffect(() => {
         gsap.fromTo(
             triggerRef.current,
-            { x: isVisibleMobile ? '-70%' : '33%' }, // Bắt đầu từ vị trí bên trái
+            { x: isVisibleMobile ? '-150%' : '33%' }, // Bắt đầu từ vị trí bên trái
             {
                 x: isVisibleMobile ? '0%' : '-35%', // Kết thúc ở vị trí chuẩn
                 duration: 5,
@@ -149,7 +149,7 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
     return (
         <div id="ss-skills" ref={sessionRef} className='flex flex-col gap-8'>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Skills</h1>
-            <h1 className='w-full text-start  px-8 py-2'>
+            <h1 className='w-full lg:text-start text-center  px-8 py-2'>
                 My Practical Skills
             </h1>
             <div className={`shadow-xl box-bgc w-full bg-gray-500 overflow-hidden`} >
