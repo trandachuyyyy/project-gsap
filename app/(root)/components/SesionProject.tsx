@@ -148,11 +148,11 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
         <div id='ss-project' className={`flex flex-col gap-8`}>
             <div className={` ${className} `}>
                 <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Project</h1>
-                <h1 className='w-full lg:text-start text-center py-2'>
+                <h1 className='w-full text-center py-2'>
                     Implemented projects
                 </h1>
             </div>
-            <div className="bg-gray-200">
+            <div className="bg-gray-200 ">
                 <div ref={triggerRef} className={` grid grid-cols-1 gap-8 lg:mx-auto  mx-8 max-w-[800px] overflow-hidden my-10`} >
                     {
                         projects.map((e: any, index: any) => {
@@ -232,7 +232,6 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                         })
                     }
                 </div>
-
             </div>
         </div>
     )

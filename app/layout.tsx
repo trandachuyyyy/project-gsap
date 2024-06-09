@@ -6,8 +6,12 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Next end Gsap",
-  description: "Next end Gsap",
+  title: "Huy Tran",
+  description: "Huy Tran",
+  icons: {
+    icon: "/profile/huy.jpg",
+    shortcut: "/profile/huy.jpg",
+  },
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {

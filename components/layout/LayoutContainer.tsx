@@ -7,12 +7,22 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import Header from './Header'
-gsap.registerPlugin(ScrollTrigger)
+import { useGSAP } from '@gsap/react';
+import { usePathname } from 'next/navigation'
+import { ScrollSmoother } from 'gsap-trial/dist/ScrollSmoother';
 
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, useGSAP);
+}
 const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     const queryClient = new QueryClient()
+
+    const pathname = usePathname();
+
     const [showSplash, setShowSplash] = useState(true)
+
     const { isVisibleMobile, isVisibleTablet, onCloseResizeMobile, onCloseResizeTablet, onResizeMobile, onResizeTablet } = useResize()
+
     useEffect(() => {
         const timeline = gsap.timeline({ delay: 1 });
 
@@ -67,6 +77,10 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
         onResizeMobile,
         onResizeTablet,
     ]);
+
+
+
+
 
     if (showSplash) {
         return (
