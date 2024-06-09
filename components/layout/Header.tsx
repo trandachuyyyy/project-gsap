@@ -41,12 +41,12 @@ const Header = () => {
                     const logo = document.querySelector('.logo');
                     const scrollToText = document.querySelector('.scroll-to');
                     if (scrollProgress >= 0.80) {
-                        gsap.to(logo, { opacity: 0 });
+                        gsap.to(logo, { display: 'none', })
                         setHeaderVisible(true);
-                        gsap.to(scrollToText, { opacity: 0 })
+                        gsap.to(scrollToText, { display: 'none', })
                     } else {
-                        gsap.to(logo, { opacity: 1 });
-                        gsap.to(scrollToText, { opacity: 1 });
+                        gsap.to(logo, { display: 'block', });
+                        gsap.to(scrollToText, { display: 'block', });
                         setHeaderVisible(false);
                     }
                 },
