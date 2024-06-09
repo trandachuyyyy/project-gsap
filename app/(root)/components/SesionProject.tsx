@@ -222,7 +222,7 @@ const SesionProject = ({ className, ...props }: { className: string }) => {
                                     </div>
                                     {index == 0 &&
                                         <p ref={scrollToRef}
-                                            className="scroll-to absolute left-1/2 -bottom-10 z-[9999] flex items-center cursor-pointer gap-2 font-mono  lg:text-lg text-xs ">
+                                            className="scroll-to absolute left-1/2 -translate-x-1/2 -bottom-10 z-[9999] flex items-center cursor-pointer gap-2 font-mono  lg:text-lg text-xs ">
                                             Scroll To <FaAnglesDown className='animate-bounce text-sm' />
                                         </p>
                                     }
