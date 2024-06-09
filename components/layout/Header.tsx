@@ -122,7 +122,7 @@ const Header = () => {
                 <p
                     onClick={() => handleScrollSession('ss-home')}
                     className="scroll-to flex items-center cursor-pointer gap-2 font-mono fixed lg:text-lg text-xs bottom-2 left-1/2 -translate-x-1/2 z-[1000] ">
-                    Scroll To <FaAnglesDown className='animate-bounce text-sm' />
+                    Scroll down <FaAnglesDown className='animate-bounce text-sm' />
                 </p>
             </div>
             <div className="container w-full h-screen bg-gray-100">
