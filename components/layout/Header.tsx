@@ -125,7 +125,7 @@ const Header = () => {
                     Scroll down <FaAnglesDown className='animate-bounce text-sm' />
                 </p>
             </div>
-            <div className="container w-full h-screen bg-gray-100">
+            <div className="container w-full h-screen bg-gray-100 max-w-full">
 
             </div>
         </div>
