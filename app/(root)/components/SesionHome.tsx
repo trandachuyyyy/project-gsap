@@ -100,7 +100,7 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
     }, []);
     return (
         <div id='ss-home' className="pt-[140px]">
-            <div className={`flex flex-col gap-8 ${className}`} ref={textRef} >
+            {/* <div className={`flex flex-col gap-8 ${className}`} ref={textRef} >
                 <div className="">
                     <h1 className='text-3xl font-black uppercase sm:text-4xl md:text-7xl xl:text-9xl'>
                         Hello, you have come to my page
@@ -111,8 +111,8 @@ const SesionHome = ({ className, ...props }: { className: string }) => {
                         {`Let's experience it together`}
                     </h1>
                 </div>
-            </div>
-            <div className="grid box-content mt-8 lg:grid-cols-2 grid-cols-1 lg:divide-y-0 divide-y lg:items-center w-full lg:h-[300px] h-[500px]">
+            </div> */}
+            <div className="content grid box-content mt-8 lg:grid-cols-2 grid-cols-1 lg:divide-y-0 divide-y lg:items-center w-full lg:h-[300px] h-[500px]">
                 <div className='box-title-name col-span-1 h-full items-center lg:border-r-2 flex lg:flex-row flex-col gap-2 box-decoration-clone  text-white p-4 lg:rounded-tr-full lg:rounded-br-full'>
                     <div className="lg:w-[20%] mx-auto w-[150px] h-[150px]">
                         <Image

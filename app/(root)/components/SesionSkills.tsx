@@ -147,11 +147,8 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
 
 
     return (
-        <div id="ss-skills" ref={sessionRef} className='flex flex-col gap-8'>
+        <div id="ss-skills" ref={sessionRef} className='flex flex-col gap-8 overflow-hidden'>
             <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Skills</h1>
-            <h1 className='w-full text-center  px-8 py-2'>
-                My Practical Skills
-            </h1>
             <div className={`shadow-xl box-bgc w-full bg-gray-500 overflow-hidden`} >
                 <div ref={triggerRef} className={`flex ${isVisibleMobile ? 'flex-row flex-wrap' : 'flex-row'} gap-2 mx-16 justify-center my-32`}>
                     {skils.map((e, index) => {
@@ -164,7 +161,6 @@ const SesionSkills = ({ className, ...props }: { className: string }) => {
                 </div>
             </div>
         </div>
-
     )
 }
 

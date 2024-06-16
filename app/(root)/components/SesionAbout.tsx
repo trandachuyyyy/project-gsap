@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useEffect } from 'react'
 import { Draggable } from 'gsap/Draggable';
+import MixedShapesScene from '@/components/matterScene/MatterScene';
 
 gsap.registerPlugin(ScrollTrigger)
 const SesionAbout = ({ className }: { className: string }) => {
@@ -87,6 +88,7 @@ const SesionAbout = ({ className }: { className: string }) => {
 
                 </div>
             </div>
+            <MixedShapesScene />
         </div>
     )
 }
