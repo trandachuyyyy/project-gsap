@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import IntroSection from "./IntroSection";
 import { useHeader } from "@/hooks/useMenuHeader";
 import MobileMenu from "./MobileMenu";
+import { useResize } from "@/hooks/useResize";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,6 +19,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     const viewportRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const splashRef = useRef<any>(null);
+    const { isVisibleMobile, isVisibleTablet } = useResize()
     const [showSplash, setShowSplash] = useState(true);
     const { openMenu } = useHeader()
 
@@ -151,7 +153,10 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                     <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>
-                <CustomCursor />
+                {
+                    (!isVisibleMobile || !isVisibleTablet) && <CustomCursor />
+                }
+
 
             </div>
             <ReactQueryDevtools initialIsOpen={false} />
@@ -231,7 +236,7 @@ const CustomCursor = () => {
         <div
             ref={cursorRef}
             style={{ opacity: hasMoved ? 1 : 0 }}
-            className="pointer-events-none fixed top-0 left-0 z-[9999] w-20 h-20 rounded-full bg-white mix-blend-difference shadow-[0_0_30px_10px_rgba(255,255,255,0.4)]"
+            className="pointer-events-none  fixed top-0 left-0 z-[9999] w-20 h-20 rounded-full bg-white mix-blend-difference shadow-[0_0_30px_10px_rgba(255,255,255,0.4)]"
         />
     );
 };
