@@ -1,101 +1,161 @@
-'use client'
-import { useResize } from '@/hooks/useResize'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import gsap from 'gsap'
-import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import Footer from './Footer'
-import Header from './Header'
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Header from "./Header";
+import Footer from "./Footer";
+import IntroSection from "./IntroSection";
+import { useHeader } from "@/hooks/useMenuHeader";
+import MobileMenu from "./MobileMenu";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const queryClient = new QueryClient();
 
 const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
-    const queryClient = new QueryClient()
-
-    const pathname = usePathname();
-
-    const [showSplash, setShowSplash] = useState(true)
-
-    const { isVisibleMobile, isVisibleTablet, onCloseResizeMobile, onCloseResizeTablet, onResizeMobile, onResizeTablet } = useResize()
+    const viewportRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const splashRef = useRef<any>(null);
+    const [showSplash, setShowSplash] = useState(true);
+    const { openMenu } = useHeader()
 
     useEffect(() => {
-        const timeline = gsap.timeline({ delay: 1 });
+        // Đảm bảo splash screen hiển thị ngay từ đầu
+        gsap.set(splashRef.current, { autoAlpha: 1 });
 
-        if (showSplash) {
-            timeline.fromTo('.splash-text', { y: '0%', opacity: 1 }, { y: '-300%', opacity: 1, duration: 1 })
-                .to('.splash-background-2', { bottom: '-50%', duration: 1, delay: -1 })
-                .to('.splash-text', { y: '-800%', opacity: 0, duration: 0.49, delay: 0 }, 1)
-                .to('.splash-background-2', { bottom: '0%', borderRadius: 0, duration: 0.5, delay: 0 }, 1)
-                .set('.splash-container', { display: 'none' }) // Ẩn splash
-        }
-    }, [showSplash])
+        // Khởi tạo text ẩn hoàn toàn
+        gsap.set(splashRef.current?.querySelector(".name"), {
+            autoAlpha: 0,
+            y: 100,
+            scale: 0.8
+        });
+        gsap.set(splashRef.current?.querySelector(".title"), {
+            autoAlpha: 0,
+            y: 50
+        });
 
-    useEffect(() => {
-        // Tắt splash sau 3s
-        const timeout = setTimeout(() => {
-            setShowSplash(false);
-        }, 3000);
-        return () => clearTimeout(timeout);
-    }, []);
+        // Hiệu ứng Splash Screen
+        const tl = gsap.timeline({
+            delay: 0.1, // Thêm delay nhỏ để đảm bảo DOM ready
+            onComplete: () => setShowSplash(false),
+        });
 
-    useEffect(() => {
-        // Kiểm tra kích thước màn hình và cập nhật trạng thái isVisible
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                // khi đến màn 768 thì bắt đầu thực hiện function
-                onResizeMobile();
-            } else {
-                onCloseResizeMobile()
+        tl.to(
+            splashRef.current?.querySelector(".name"),
+            {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                duration: 1.5,
+                ease: "power4.out"
             }
-            if (window.innerWidth <= 768) {
-                onResizeTablet()
-            } else {
-                onCloseResizeTablet()
-            }
-        };
-
-        // Gọi hàm handleResize khi kích thước màn hình thay đổi
-        window.addEventListener('resize', handleResize);
-
-        // Gọi hàm handleResize một lần khi component được render
-        handleResize();
-
-        // Hủy lắng nghe sự kiện resize khi component bị unmount
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [
-        isVisibleMobile,
-        isVisibleTablet,
-        onCloseResizeMobile,
-        onCloseResizeTablet,
-        onResizeMobile,
-        onResizeTablet,
-    ]);
-
-
-
-
-
-    if (showSplash) {
-        return (
-            <div className="splash-container" style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
-                <div className="splash-background bg-gray-200" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}></div>
-                <div className={`splash-background-2 bg-white ${isVisibleMobile ? 'rounded-tl-[70%] rounded-tr-[70%]' : "rounded-tl-[100%] rounded-tr-[100%]"} translate-x-[-7%]`} style={{ position: 'absolute', bottom: '-100%', left: 0, width: '120vw', height: '100%', zIndex: 1 }}></div>
-                <div className="splash-text uppercase text-black font-bold lg:text-[48px] text-2xl" style={{ zIndex: 3, position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', }}>Huy tran</div>
-            </div>
         )
-    }
+            .to(
+                splashRef.current?.querySelector(".title"),
+                {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "power3.out"
+                },
+                "-=0.8"
+            )
+            .to(
+                splashRef.current,
+                {
+                    autoAlpha: 0,
+                    duration: 0.8,
+                    ease: "power2.in",
+                    delay: 0.5
+                }
+            );
 
+        // Hiệu ứng hiển thị content chính
+        if (!showSplash) {
+            const ctx = gsap.context(() => {
+                gsap.fromTo(
+                    contentRef.current,
+                    { autoAlpha: 0, scale: 0.98 },
+                    {
+                        autoAlpha: 1,
+                        scale: 1,
+                        duration: 1.8,
+                        ease: "power3.out"
+                    }
+                );
 
+            }, viewportRef);
+            return () => ctx.revert();
+        }
+    }, [showSplash]);
+
+    useEffect(() => {
+        const initLenis = async () => {
+            const Lenis = (await import("@studio-freight/lenis")).default;
+            const lenis = new Lenis({
+                duration: 1.8,
+                easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+
+            function raf(time: number) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add((time) => lenis.raf(time * 1000));
+            ScrollTrigger.refresh();
+
+            return () => lenis.destroy();
+        };
+
+        initLenis();
+    }, []);
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Header />
-            {children}
-            <Footer />
+            <div
+                ref={viewportRef}
+                id="viewport"
+                className="relative min-h-screen bg-[#0a0a0a] text-white"
+            >
+                {
+                    <MobileMenu />
+                }
+                <Header />
+
+                {showSplash && (
+                    <div
+                        ref={splashRef}
+                        className="fixed inset-0 bg-[#0a0a0a] flex flex-col items-center justify-center z-50"
+                    >
+                        <h1
+                            className="name text-5xl md:text-7xl font-bold tracking-tight"
+                            style={{ visibility: "hidden" }} // Ẩn mặc định bằng CSS
+                        >
+                            TRAN DAC HUY
+                        </h1>
+                        <p
+                            className="title text-xl md:text-2xl mt-4 text-gray-400"
+                            style={{ visibility: "hidden" }} // Ẩn mặc định bằng CSS
+                        >
+                            FRONTEND DEVELOPER
+                        </p>
+                    </div>
+                )}
+                <div ref={contentRef} id="content" className="opacity-0">
+
+                    <IntroSection />
+                    <main className="relative z-0">{children}</main>
+                    <Footer />
+                </div>
+            </div>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-    )
-}
+    );
+};
 
-export default LayoutContainer
+export default LayoutContainer;

@@ -1,96 +1,172 @@
-"use client"
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import { useEffect } from 'react'
-import { Draggable } from 'gsap/Draggable';
-import MixedShapesScene from '@/components/matterScene/MatterScene';
+'use client';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger)
-const SesionAbout = ({ className }: { className: string }) => {
+gsap.registerPlugin(ScrollTrigger);
+
+const SesionAbout = ({ className }: { className?: string }) => {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const subtitleRef = useRef<HTMLHeadingElement>(null);
+    const boxesRef = useRef<Array<HTMLDivElement | null>>([]);
+    const lineRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
-        const textElement = document.querySelectorAll('.box-about')
+        // Title animation - trigger sớm hơn
         gsap.fromTo(
-            textElement,
+            titleRef.current,
+            { opacity: 0, scale: 0.95 },
             {
-                borderRadius: '0%',
-                height: '30%',
-                opacity: 0.5,
-            },
-            {
-                duration: 5,
                 opacity: 1,
-                height: '100%',
-                borderRadius: '1%',
-                borderTop: '5px solid black',
-                ease: 'power1.inOut',
+                scale: 1,
+                duration: 1,
+                ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: '.content-about',
-                    start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
-                    end: 'top', // Kết thúc khi cuộn đến giữa dưới của phần tử
-                    scrub: 2, // Hiệu ứng kéo theo scroll
-                    // markers: true, // Hiển thị markers để kiểm tra
-                    onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
+                    trigger: titleRef.current,
+                    start: 'top bottom-=120', // 👈 Trigger sớm hơn
+                    toggleActions: 'play none none reverse',
                 },
             }
         );
-        // const textElement = document.querySelectorAll('.text-about-animation')
-        // gsap.fromTo(
-        //     textElement,
-        //     { x: '0%' }, // Bắt đầu từ vị trí bên trái
-        //     {
-        //         x: '-170%', // Kết thúc ở vị trí chuẩn
-        //         duration: 5,
-        //         ease: 'power1.inOut',
-        //         scrollTrigger: {
-        //             trigger: '.content-about',
-        //             start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
-        //             end: 'bottom bottom', // Kết thúc khi cuộn đến giữa dưới của phần tử
-        //             scrub: 5, // Hiệu ứng kéo theo scroll
-        //             // markers: true, // Hiển thị markers để kiểm tra
-        //             onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
-        //         },
-        //     }
-        // );
-    }, [])
+
+        // Subtitle animation - trigger sớm hơn
+        gsap.fromTo(
+            subtitleRef.current,
+            { opacity: 0, y: 30 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: subtitleRef.current,
+                    start: 'top bottom-=100', // 👈
+                    toggleActions: 'play none none reverse',
+                },
+            }
+        );
+
+        // Boxes animations – show individually, trigger sớm
+        boxesRef.current.forEach((box) => {
+            if (!box) return;
+            gsap.fromTo(
+                box,
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top bottom-=80', // 👈 Sớm hơn
+                        toggleActions: 'play none none reverse',
+                    },
+                }
+            );
+
+            // Hover magnetic effect
+            box.addEventListener('mousemove', (e) => {
+                const rect = box.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(box, {
+                    x: x * 0.02,
+                    y: y * 0.02,
+                    rotateX: -y * 0.05,
+                    rotateY: x * 0.05,
+                    duration: 0.3,
+                });
+            });
+
+            box.addEventListener('mouseleave', () => {
+                gsap.to(box, {
+                    x: 0,
+                    y: 0,
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.4,
+                    ease: 'power2.out',
+                });
+            });
+        });
+
+        // Line animation - sweep
+        gsap.fromTo(
+            lineRef.current,
+            { scaleX: 0 },
+            {
+                scaleX: 1,
+                transformOrigin: 'left',
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top bottom-=100', // 👈 Trigger sớm hơn
+                    toggleActions: 'play none none reverse',
+                },
+            }
+        );
+    }, []);
+
+
     const arrayAbout = [
-        'I have regularly worked with react and the nextjs framework since graduating and now I have been working with it for about 2 years.',
-        'I often research and self-study about technology, this page was also built when I learned about the Gsap library.',
-        'Please experience this page and leave me comments I will try to fix and develop in the future.'
-    ]
+        'I design and build modern web interfaces with performance in mind.',
+        'Creating user experiences that feel smooth, fast, and delightful.',
+        'From concept to code, I bring ideas to life with precision.',
+    ];
+
     return (
-        <div id='ss-about' className='content-about flex flex-col gap-8  overflow-hidden'>
-            <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>About</h1>
-            <h1 className='w-full text-center  px-8 py-2'>Something about me</h1>
-            <div className={`bg-gray-100 text-about-animation`} >
-                <div className='grid lg:grid-cols-3 grid-cols-1 gap-4  py-4 '>
-                    {arrayAbout.map((item, index) => (
-                        <div key={index} className={`bg-gray-200 border-t-2 h-fit col-span-1 border-gray-400 box-about    p-8 `}>
-                            <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
-                                {item}
-                            </h1>
-                        </div>
-                    ))}
-                    {/* <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
-                        <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
-                            I have regularly worked with react and the nextjs framework since graduating and now I have been working with it for about 2 years.
-                        </h1>
-                    </div>
-                    <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8">
-                        <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
-                            I often research and self-study about technology, this page was also built when I learned about the Gsap library.
-                        </h1>
-                    </div>
-                    <div className=" bg-gray-200 box-about  w-1/2 min-w-fit  p-8 ">
-                        <h1 className='max-w-lg text-base sm:text-2xl lg:justify-self-end lg:text-2xl '>
-                            Please experience this page and leave me comments I will try to fix and develop in the future.
-                        </h1>
-                    </div> */}
+        <div
+            id='ss-about'
+            ref={sectionRef}
+            className={`relative min-h-screen py-24 bg-black text-white overflow-hidden ${className}`}
+        >
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 opacity-80 pointer-events-none" />
 
-                </div>
+            {/* Optional grid overlay */}
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02] pointer-events-none" />
+
+            {/* Title + subtitle */}
+            <div className="relative z-10 max-w-6xl mx-auto text-center px-6">
+                <h1
+                    ref={titleRef}
+                    className="text-4xl font-extrabold uppercase tracking-wider"
+                >
+                    About
+                </h1>
+                <h2
+                    ref={subtitleRef}
+                    className="mt-4 text-xl md:text-2xl font-light text-white/80"
+                >
+                    The story behind the work
+                </h2>
             </div>
-            <MixedShapesScene />
-        </div>
-    )
-}
 
-export default SesionAbout
+            {/* Boxes */}
+            <div className="mt-20 relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+                {arrayAbout.map((text, index) => (
+                    <div
+                        key={index}
+                        ref={(el: any) => (boxesRef.current[index] = el)}
+                        className="min-h-[160px] p-6 bg-white/5 border border-white/10 rounded-lg hover:border-white/30 hover:shadow-lg transition-all duration-300"
+                    >
+                        <p className="text-white/90 text-base font-light leading-relaxed">
+                            {text}
+                        </p>
+                    </div>
+                ))}
+            </div>
+
+            {/* Line */}
+            <div
+                ref={lineRef}
+                className="mt-20 h-1 max-w-4xl mx-auto bg-gradient-to-r from-transparent via-white to-transparent scale-x-0"
+            />
+        </div>
+    );
+};
+
+export default SesionAbout;

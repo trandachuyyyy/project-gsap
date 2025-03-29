@@ -1,164 +1,96 @@
-"use client"
-import { useResize } from '@/hooks/useResize'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import { useEffect, useState } from 'react'
-import { FaAnglesDown } from 'react-icons/fa6'
-gsap.registerPlugin(ScrollTrigger)
+'use client';
+import { useEffect, useState, useRef } from 'react';
+import gsap from 'gsap';
+import { useHeader } from '@/hooks/useMenuHeader';
+
 const Header = () => {
-    const nav = [
-        { name: 'Home', href: 'ss-home' },
-        { name: 'About', href: 'ss-about' },
-        { name: 'Skills', href: 'ss-skills' },
-        { name: 'Project', href: 'ss-project' },
-    ]
+    const { openMenu, setOpenMenu } = useHeader()
+    const scrollThreshold = 50;
+    const lastScrollY = useRef(0);
+    const [isVisible, setIsVisible] = useState(true);
 
-    const { isVisibleMobile } = useResize()
+    const isIntroInView = () => {
+        const intro = document.getElementById('ss-intro');
+        if (!intro) return false;
+        const rect = intro.getBoundingClientRect();
+        // return rect.top < window.innerHeight && rect.bottom > 0;
 
-    const [headerVisible, setHeaderVisible] = useState<boolean>(false);
-
-    useEffect(() => {
-        const pinTrigger = gsap.fromTo('.logo', {
-            y: "50vh",
-            fontSize: isVisibleMobile ? '18px' : '72px',
-            // scale: isVisibleMobile ? 4 : 6,
-            yPercent: -50,
-            duration: 2,
-            ease: "power1.inOut", // Thêm thuộc tính ease
-        }, {
-            // scale: 1,
-            fontSize: isVisibleMobile ? '20px' : '52px',
-            translateY: '100%',
-            scrollTrigger: {
-                trigger: '.content',
-                scrub: 2,
-                start: 'top bottom',
-                endTrigger: '.content',
-                end: 'top 1000',
-                onUpdate: (self) => {
-                    const scrollProgress = self.progress;
-                    const logo = document.querySelector('.logo');
-                    const scrollToText = document.querySelector('.scroll-to');
-                    if (scrollProgress >= 0.80) {
-                        gsap.to(logo, { display: 'none', })
-                        setHeaderVisible(true);
-                        gsap.to(scrollToText, { display: 'none', })
-                    } else {
-                        gsap.to(logo, { display: 'block', });
-                        gsap.to(scrollToText, { display: 'flex', });
-                        setHeaderVisible(false);
-                    }
-                },
-
-            },
-            ease: 'power1.inOut',
-        });
-
-        return () => {
-            pinTrigger.kill();
-        };
-    }, []);
-
-    const handleScrollSession = (id: string) => {
-        const targetElement = document.getElementById(id);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-        }
+        return rect.top < window.innerHeight + 300 && rect.bottom > 300;
     };
 
-
-    const [lastScrollTop, setLastScrollTop] = useState(0);
+    const handleScroll = (id: string) => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                // gsap.to('.nav', { maxHeight: '0px', opacity: 0, duration: 0.5, ease: 'power1.inOut' });
-                setHeaderVisible(false);
+        const onScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // ❗ Nếu #ss-intro đang trong viewport → luôn ẩn
+            if (isIntroInView()) {
+                if (isVisible) {
+                    gsap.to('header', { opacity: 0, y: -100, duration: 0.3 });
+                    setIsVisible(false);
+                }
+                lastScrollY.current = currentScrollY;
+                return;
             }
-            else if (scrollTop > 100) {
-                // Scrolling up
-                // gsap.to('.nav', { maxHeight: '70px', opacity: 1, duration: 0.5, ease: 'power1.inOut' });
-                setHeaderVisible(true);
-            } else {
-                // Ở trên cùng
-                setHeaderVisible(false)
+
+            // Nếu cuộn xuống → ẩn header
+            if (currentScrollY > lastScrollY.current && currentScrollY > scrollThreshold) {
+                if (isVisible) {
+                    gsap.to('header', { opacity: 0, y: -100, duration: 0.3 });
+                    setIsVisible(false);
+                }
             }
-            setLastScrollTop(scrollTop);
+
+            // Nếu cuộn lên và vượt qua ngưỡng → hiện header
+            else if (currentScrollY < lastScrollY.current && currentScrollY > scrollThreshold) {
+                if (!isVisible) {
+                    gsap.to('header', { opacity: 1, y: 0, duration: 0.3 });
+                    setIsVisible(true);
+                }
+            }
+
+            lastScrollY.current = currentScrollY;
         };
 
-        window.addEventListener('scroll', handleScroll);
-
+        window.addEventListener('scroll', onScroll);
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', onScroll);
         };
-    }, [lastScrollTop]);
-
-    useEffect(() => {
-        document.body.addEventListener("mousemove", event => {
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
-
-            gsap.set(".cursor", {
-                x: mouseX,
-                y: mouseY
-            });
-
-            console.log(mouseX)
-
-            gsap.to(".shape", {
-                x: mouseX,
-                y: mouseY,
-                stagger: -0.1
-            });
-        });
-
-    }, []);
+    }, [isVisible]);
 
     return (
-        <div>
+        <header className="header w-full fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl shadow-lg px-8 py-4 flex justify-between items-center">
             <div
-                style={{
-                    maxHeight: headerVisible ? '70px' : '0px',
-                    opacity: headerVisible ? 1 : 0,
-                    overflow: 'hidden',
-                    transition: 'max-height 0.5s ease-in-out, opacity 0.5s ease-in-out'
-                }}
-                className='nav fixed w-full h-[70px] flex items-center justify-between px-8 bg-gray-200 z-[999]'>
-                <div onClick={() => handleScrollSession('ss-home')} className='lg:text-base text-sm font-semibold uppercase'>Huy Tran</div>
-                <div className="flex justify-between gap-4">
-                    {nav.map((e: any) => {
-                        return (
-                            <div onClick={() => handleScrollSession(e.href)} className='text-base cursor-pointer font-semibold' key={e.name}>
-                                {e.name}
-                            </div>
-                        )
-                    })
-                    }
-                </div>
+                onClick={() => handleScroll('ss-home')}
+                className="cursor-pointer text-xl font-bold text-white hover:text-teal-400 duration-300"
+            >
+                Huy Tran
             </div>
-            <div className='logo-container'>
-                <div className="logo uppercase text-center font-bold fixed top-0 translate-y-1/2 w-full ">
-                    <div className="flex flex-col lg:text-2xl text-sm">
-                        <span> Hello</span>
-                        <span>
-                            you have come to my page
-                        </span>
-                    </div>
-                </div>
-                <p
-                    onClick={() => handleScrollSession('ss-home')}
-                    className="scroll-to flex items-center cursor-pointer gap-2 font-mono fixed lg:text-lg text-xs bottom-2 left-1/2 -translate-x-1/2 z-[1000] ">
-                    Scroll down <FaAnglesDown className='animate-bounce text-sm' />
-                </p>
-            </div>
-            <div className="container w-full h-screen bg-gray-100 max-w-full">
+            <nav className="hidden md:flex gap-6">
+                {['Home', 'About', 'Skills', 'Projects'].map((name, index) => {
+                    const href = ['ss-home', 'ss-about', 'ss-skills', 'ss-project'][index];
+                    return (
+                        <button
+                            key={href}
+                            onClick={() => handleScroll(href)}
+                            className="relative text-sm uppercase text-gray-300 hover:text-teal-400 duration-300 group"
+                        >
+                            {name}
+                            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-teal-400 group-hover:w-full transition-all duration-300"></span>
+                        </button>
+                    );
+                })}
+            </nav>
+            <button
+                onClick={() => setOpenMenu(!openMenu)}
+                className="md:hidden text-teal-400">
+                Menu
+            </button>
+        </header>
+    );
+};
 
-            </div>
-
-        </div>
-    )
-}
-
-export default Header
+export default Header;

@@ -11,7 +11,7 @@ const Page = () => {
 
     return (
 
-        <div id='your-smoother-element-id' data-hero className='py-4 h-full flex flex-col gap-8 bg-gray-100 '>
+        <div id='your-smoother-element-id' data-hero className='h-full flex flex-col bg-gray-100 '>
             <SesionHome className='px-8 ' />
             <SesionOtherText />
             <SesionAbout className='px-8' />

@@ -1,165 +1,163 @@
 'use client'
 
-import { useResize } from "@/hooks/useResize";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 gsap.registerPlugin(ScrollTrigger)
 
-const SesionSkills = ({ className, ...props }: { className: string }) => {
-    const skils = [
-        'React',
-        'Nextjs',
-        'Tailwindcss',
-        'Shadcn',
-        'Ant Design',
-        'Javascript',
-        'Typescript',
-        'Zustand',
-        'React Query',
-        'Github',
-        'Html',
-        'Css',
-        'Sass',
+const SesionSkills = ({ className }: { className?: string }) => {
+    const sectionRef = useRef<HTMLDivElement>(null)
+    const titleRef = useRef<HTMLHeadingElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
+    const skillRefs = useRef<Array<HTMLDivElement | null>>([])
+    const lineRef = useRef<HTMLDivElement>(null)
+
+    const skills = [
+        'React', 'Nextjs', 'Tailwindcss', 'Shadcn',
+        'Ant Design', 'Javascript', 'Typescript', 'Zustand',
+        'React Query', 'D3Js', 'PusherJs', 'WebSocket', 'Github', 'HTML', 'CSS', 'Sass',
     ]
 
-    const sessionRef = useRef(null);
-
-    const triggerRef = useRef(null);
-
-    const { isVisibleMobile } = useResize()
-
     useEffect(() => {
+        // Title animation
         gsap.fromTo(
-            triggerRef.current,
-            { x: isVisibleMobile ? '-150%' : '33%' }, // Bắt đầu từ vị trí bên trái
+            titleRef.current,
+            { opacity: 0, scale: 0.95 },
             {
-                x: isVisibleMobile ? '0%' : '-35%', // Kết thúc ở vị trí chuẩn
-                duration: 5,
-                ease: 'power1.inOut',
-                scrollTrigger: {
-                    trigger: triggerRef.current,
-                    start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
-                    end: 'top bottom', // Kết thúc khi cuộn đến giữa dưới của phần tử
-                    scrub: 5, // Hiệu ứng kéo theo scroll
-                    // markers: true, // Hiển thị markers để kiểm tra
-                    onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
-
-                },
-            }
-        );
-    }, [])
-
-
-    useEffect(() => {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.box-bgc',
-                start: 'top center',
-                end: 'bottom end',
-                scrub: 2,
-            }
-        });
-
-        tl.fromTo('.box-bgc', {
-            // borderBottomLeftRadius: '0%',
-            // borderBottomRightRadius: '0%',
-            duration: 5,
-            ease: 'power1.inOut',
-        }, {
-            borderBottomLeftRadius: '0px',
-            borderBottomRightRadius: '0px',
-            ease: 'power3.out',
-        })
-            .to('.box-bgc', { // Thêm bước mới vào timeline
-                // borderBottomLeftRadius: '500px',
-                // borderBottomRightRadius: '500px',
-                duration: 2, // Thời gian hiệu ứng
-            }, "-=3"); // Bắt đầu sau 0.5 giây
-    }, [])
-
-
-    useEffect(() => {
-        const textElement = document.querySelectorAll('.box-skills')
-        gsap.fromTo(
-            textElement,
-            {
-                borderRadius: '0%',
-                opacity: 0.5
-            }, // Bắt đầu từ vị trí bên trái
-            {
-                duration: 5,
                 opacity: 1,
-                borderRadius: '16px',
-                ease: 'power1.inOut',
+                scale: 1,
+                duration: 1,
+                ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: '.box-bgc',
-                    start: 'top center', // Kích hoạt ngay khi đến giữa của phần tử
-                    end: 'top', // Kết thúc khi cuộn đến giữa dưới của phần tử
-                    scrub: 5, // Hiệu ứng kéo theo scroll
-                    // markers: true, // Hiển thị markers để kiểm tra
-                    onEnterBack: () => console.log('Cuộn hết nội dung'), // Xác định khi nào cuộn hết nội dung
+                    trigger: titleRef.current,
+                    start: 'top bottom-=120',
+                    toggleActions: 'play none none reverse',
                 },
             }
-        );
+        )
 
-    }, [])
+        // Container animation
+        gsap.fromTo(
+            containerRef.current,
+            { opacity: 0, y: 60 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: 'top bottom-=80',
+                    toggleActions: 'play none none reverse',
+                },
+            }
+        )
 
-    useEffect(() => {
-        const elements = document.querySelectorAll('.text-gray-200') as NodeListOf<HTMLElement>;
-
-        elements.forEach(element => {
-            let isDragging = false;
-            let initialX: any, initialY: any;
-            let xOffset = 0, yOffset = 0;
-
-            element.addEventListener('mousedown', (e: any) => {
-                isDragging = true;
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
-            });
-
-            element.addEventListener('mousemove', (e: any) => {
-                if (isDragging) {
-                    e.preventDefault(); // Ngăn chặn việc chọn văn bản khi kéo
-                    const currentX = e.clientX - initialX;
-                    const currentY = e.clientY - initialY;
-
-                    xOffset = currentX;
-                    yOffset = currentY;
-
-                    element.style.transform = `translate(${currentX}px, ${currentY}px)`;
-
+        // Skill box animations – show early
+        skillRefs.current.forEach((box) => {
+            if (!box) return
+            gsap.fromTo(
+                box,
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: box,
+                        start: 'top bottom+=60', // 👈 Trigger sớm hơn
+                        toggleActions: 'play none none reverse',
+                    },
                 }
-            });
+            )
 
-            element.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
+            // Hover tilt effect
+            box.addEventListener('mousemove', (e) => {
+                const rect = box.getBoundingClientRect()
+                const x = e.clientX - rect.left - rect.width / 2
+                const y = e.clientY - rect.top - rect.height / 2
+                gsap.to(box, {
+                    x: x * 0.02,
+                    y: y * 0.02,
+                    rotateX: -y * 0.05,
+                    rotateY: x * 0.05,
+                    duration: 0.3,
+                })
+            })
 
-            element.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
+            box.addEventListener('mouseleave', () => {
+                gsap.to(box, {
+                    x: 0,
+                    y: 0,
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.4,
+                    ease: 'power2.out',
+                })
+            })
+        })
 
-        });
-    }, []);
-
-
+        // Line animation
+        gsap.fromTo(
+            lineRef.current,
+            { scaleX: 0 },
+            {
+                scaleX: 1,
+                transformOrigin: 'left',
+                duration: 1.5,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top bottom-=100',
+                    toggleActions: 'play none none reverse',
+                },
+            }
+        )
+    }, [])
 
     return (
-        <div id="ss-skills" ref={sessionRef} className='flex flex-col gap-8 overflow-hidden'>
-            <h1 className='text-center text-lg md:text-2xl mb-section lg:text-4xl'>Skills</h1>
-            <div className={`shadow-xl box-bgc w-full bg-gray-500 overflow-hidden`} >
-                <div ref={triggerRef} className={`flex ${isVisibleMobile ? 'flex-row flex-wrap' : 'flex-row'} gap-2 mx-16 justify-center my-32`}>
-                    {skils.map((e, index) => {
-                        return (
-                            <div key={index} className={`text-gray-200 cursor-grab box-skills  border ${isVisibleMobile ? 'min-w-fit w-fit' : ' min-w-[170px]'} h-fit text-center font-semibold text-xl px-4 py-2`}>
-                                {e}
-                            </div>
-                        )
-                    })}
-                </div>
+        <div
+            ref={sectionRef}
+            id="ss-skills"
+            className={`relative min-h-screen py-24 bg-black text-white overflow-hidden ${className}`}
+        >
+            {/* Background match About section */}
+            <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 opacity-80 pointer-events-none" />
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02] pointer-events-none" />
+
+            {/* Title */}
+            <div className="relative z-10 max-w-6xl mx-auto text-center px-6">
+                <h1
+                    ref={titleRef}
+                    className="text-4xl font-extrabold uppercase tracking-wider"
+                >
+                    Skills
+                </h1>
             </div>
+
+            {/* Skills Grid */}
+            <div
+                ref={containerRef}
+                className="mt-20 relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6"
+            >
+                {skills.map((skill, index) => (
+                    <div
+                        key={index}
+                        ref={(el: any) => (skillRefs.current[index] = el)}
+                        className="min-h-[100px] flex items-center justify-center p-4 bg-white/5 border border-white/10 rounded-lg hover:border-white/30 hover:bg-white/10 hover:shadow-lg transition-all duration-300 text-white/90 text-base font-light cursor-default text-center backdrop-blur-sm"
+                    >
+                        {skill}
+                    </div>
+                ))}
+            </div>
+
+            {/* Bottom line like About */}
+            <div
+                ref={lineRef}
+                className="mt-20 h-1 max-w-4xl mx-auto bg-gradient-to-r from-transparent via-white to-transparent scale-x-0"
+            />
         </div>
     )
 }
