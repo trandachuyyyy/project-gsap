@@ -147,15 +147,95 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 )}
                 <div ref={contentRef} id="content" className="opacity-0">
-
                     <IntroSection />
                     <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>
+                <CustomCursor />
+
             </div>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );
 };
+const CustomCursor = () => {
+    const cursorRef = useRef<HTMLDivElement>(null);
+    const isMagnetic = useRef(false);
+    const [hasMoved, setHasMoved] = useState(false);
+
+
+
+    useEffect(() => {
+        const cursor = cursorRef.current;
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+
+        const moveCursor = (e: MouseEvent) => {
+            if (!hasMoved) setHasMoved(true);
+            const target = e.target as HTMLElement;
+
+            const isNoCursor = target.closest('.no-cursor');
+            if (isNoCursor) {
+                gsap.to(cursor, { autoAlpha: 0, duration: 0.2 });
+                return;
+            } else {
+                gsap.to(cursor, { autoAlpha: 1, duration: 0.2 });
+            }
+
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            const hoveredMagnetic = target.closest('.magnetic');
+
+            if (hoveredMagnetic) {
+                const bounds = hoveredMagnetic.getBoundingClientRect();
+                const centerX = bounds.left + bounds.width / 2;
+                const centerY = bounds.top + bounds.height / 2;
+
+                isMagnetic.current = true;
+
+                gsap.to(cursor, {
+                    x: centerX,
+                    y: centerY,
+                    scale: 2.5,
+                    duration: 0.3,
+                    ease: 'power3.out',
+                });
+            } else {
+                if (isMagnetic.current) {
+                    isMagnetic.current = false;
+                    gsap.to(cursor, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: 'power3.out',
+                    });
+                }
+
+                gsap.to(cursor, {
+                    x: mouseX,
+                    y: mouseY,
+                    duration: 0.15,
+                    ease: 'power2.out',
+                });
+            }
+        };
+
+        window.addEventListener('mousemove', moveCursor);
+
+        return () => {
+            window.removeEventListener('mousemove', moveCursor);
+            document.body.style.cursor = 'auto';
+        };
+    }, []);
+
+    return (
+        <div
+            ref={cursorRef}
+            style={{ opacity: hasMoved ? 1 : 0 }}
+            className="pointer-events-none fixed top-0 left-0 z-[9999] w-20 h-20 rounded-full bg-white mix-blend-difference shadow-[0_0_30px_10px_rgba(255,255,255,0.4)]"
+        />
+    );
+};
+
+
 
 export default LayoutContainer;

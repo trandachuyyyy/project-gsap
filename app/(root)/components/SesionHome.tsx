@@ -5,6 +5,7 @@ import Image from 'next/image'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Lenis from '@studio-freight/lenis'
+import { handleScroll } from '@/hooks/useHandleScroll'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -193,8 +194,8 @@ const SesionHome = ({ className }: { className?: string }) => {
             <div className="relative z-10 grid lg:grid-cols-2 grid-cols-1 items-center max-w-7xl mx-auto py-24 px-6 gap-12">
 
                 {/* Left Avatar + Glow */}
-                <div className="flex flex-col items-center lg:items-start gap-6">
-                    <div className="relative w-[240px] h-[240px] lg:w-[280px] lg:h-[280px] group perspective-1000">
+                <div className="  flex flex-col items-center lg:items-start gap-6">
+                    <div className=" no-cursor relative w-[240px] h-[240px] lg:w-[280px] lg:h-[280px] group perspective-1000">
                         <div className="absolute inset-0 flex items-center justify-center z-0">
                             <div className="w-[320px] h-[320px] border-2 border-dashed border-white/10 rounded-full animate-spin-slow blur-md" />
                         </div>
@@ -216,7 +217,7 @@ const SesionHome = ({ className }: { className?: string }) => {
                 </div>
 
                 {/* Right Content */}
-                <div className="text-animate text-center lg:text-left" ref={textBlockRef}>
+                <div className=" text-animate text-center lg:text-left" ref={textBlockRef}>
                     <h1 className="text-3xl lg:text-5xl font-bold uppercase tracking-wide flex flex-wrap justify-center lg:justify-start gap-2">
                         {title.split(' ').map((word, i) => (
                             <span key={i} className="hero-word inline-block">{word}</span>
@@ -230,11 +231,15 @@ const SesionHome = ({ className }: { className?: string }) => {
                         Let’s create something magical together.
                     </p>
                     <div className="mt-6 flex gap-4 flex-wrap justify-center lg:justify-start">
-                        <button className="relative group px-6 py-2 bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 rounded-full text-white font-medium transition-all duration-300 overflow-hidden">
+                        <button
+                            onClick={() => handleScroll('ss-contact')}
+                            className=" magnetic relative group px-6 py-2 bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 rounded-full text-white font-medium transition-all duration-300 overflow-hidden">
                             <span className="relative z-10">Contact Me</span>
                             <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />
                         </button>
-                        <button className="px-6 py-2 border border-white/20 hover:border-white/40 rounded-full text-white font-medium transition-all duration-300">
+                        <button
+                            onClick={() => handleScroll('ss-project')}
+                            className=" magnetic px-6 py-2 border border-white/20 hover:border-white/40 rounded-full text-white font-medium transition-all duration-300">
                             View Projects
                         </button>
                     </div>

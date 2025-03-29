@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useHeader } from '@/hooks/useMenuHeader';
+import { handleScroll } from '@/hooks/useHandleScroll';
 
 const Header = () => {
     const { openMenu, setOpenMenu } = useHeader()
@@ -16,10 +17,6 @@ const Header = () => {
         // return rect.top < window.innerHeight && rect.bottom > 0;
 
         return rect.top < window.innerHeight + 300 && rect.bottom > 300;
-    };
-
-    const handleScroll = (id: string) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
     useEffect(() => {
@@ -62,7 +59,8 @@ const Header = () => {
     }, [isVisible]);
 
     return (
-        <header className="header w-full fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl shadow-lg px-8 py-4 flex justify-between items-center">
+        <header className="header w-full fixed top-0 left-0 right-0 z-50  px-8 py-4 flex justify-between items-center">
+            {/* <header className="header w-full fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl shadow-lg px-8 py-4 flex justify-between items-center"> */}
             <div
                 onClick={() => handleScroll('ss-home')}
                 className="cursor-pointer text-xl font-bold text-white hover:text-teal-400 duration-300"
