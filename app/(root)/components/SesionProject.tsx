@@ -106,7 +106,7 @@ const SesionProject = ({ className }: { className?: string }) => {
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
                     {projects.map((project, idx) => (
                         <div
-                            ref={(el) => (projectRefs.current[idx] = el)}
+                            ref={(el: any) => (projectRefs.current[idx] = el)}
                             key={project.name}
                             className="group relative bg-gray-900 overflow-hidden rounded-xl shadow-xl transition-transform duration-500 hover:-translate-y-2"
                         >
