@@ -51,8 +51,8 @@ const Header = () => {
 
             lastScrollY.current = currentScrollY;
         };
-
         window.addEventListener('scroll', onScroll);
+        onScroll()
         return () => {
             window.removeEventListener('scroll', onScroll);
         };
