@@ -232,7 +232,9 @@ const SesionHome = ({ className }: { className?: string }) => {
                     </p>
                     <div className="mt-6 flex gap-4 flex-wrap justify-center lg:justify-start">
                         <button
-                            onClick={() => handleScroll('ss-contact')}
+                            onClick={() => {
+                                window.open('https://www.facebook.com/trandachuyy', '_blank')
+                            }}
                             className=" magnetic relative group px-6 py-2 bg-white/10 border border-white/20 hover:bg-white/20 hover:border-white/40 rounded-full text-white font-medium transition-all duration-300 overflow-hidden">
                             <span className="relative z-10">Contact Me</span>
                             <span className="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />

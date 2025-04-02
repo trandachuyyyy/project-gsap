@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
 import { useHeader } from '@/hooks/useMenuHeader';
 import { handleScroll } from '@/hooks/useHandleScroll';
+import { IoMenu } from 'react-icons/io5';
 
 const Header = () => {
     const { openMenu, setOpenMenu } = useHeader()
@@ -84,8 +85,9 @@ const Header = () => {
             </nav>
             <button
                 onClick={() => setOpenMenu(!openMenu)}
-                className="md:hidden text-teal-400">
-                Menu
+                className="md:hidden text-white">
+                <IoMenu size={28} />
+
             </button>
         </header>
     );

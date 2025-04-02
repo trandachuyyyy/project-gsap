@@ -9,9 +9,9 @@ const MobileMenu = () => {
 
     const navItems = [
         { name: 'Home', href: 'ss-home' },
-        { name: 'About', href: 'ss-about' },
         { name: 'Skills', href: 'ss-skills' },
         { name: 'Projects', href: 'ss-project' },
+        { name: 'About', href: 'ss-about' },
     ];
 
     const handleScroll = (id: string) => {

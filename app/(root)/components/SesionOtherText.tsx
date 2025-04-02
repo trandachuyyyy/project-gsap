@@ -48,8 +48,8 @@ const texts = [
     { main: "I am", sub: "The following" },
     { main: "Huy Tran", sub: "My Skills" },
     { main: "Frontend Developer", sub: "Experiences I've Gained" },
-    { main: "Contact Me", sub: "Reach Out Anytime" },
-    { main: "Animations", sub: "Powered by GSAP" },
+    { main: "Please Contact Me", sub: "Reach Out Anytime" },
+    // { main: "Animations", sub: "Powered by GSAP" },
 ]
 
 const SesionOtherText = () => {

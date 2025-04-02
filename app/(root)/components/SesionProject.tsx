@@ -8,40 +8,92 @@ gsap.registerPlugin(ScrollTrigger)
 
 const projects = [
     {
-        name: 'ERP',
-        url: 'https://github.com/huytran2000',
-        image: '/project/erp.png',
-        tech: ['NextJS', 'Tailwind', 'Redux'],
+        name: 'FMRP',
+        url: 'https://hub.fmrp.vn/auth/login',
+        image: '/project/logo/fmrp.png',
+        tech: ["ReactJs", "NextJS", "React query", "Tailwinds", "Ant-Design/Plots", 'D3Js', "Redux", "Firebase"],
         date: '02/2023 - Present',
     },
     {
+        name: 'Zenmi-Ticket',
+        url: 'https://ticket.erpzenmi.com/',
+        image: '/project/logo/zenmi.svg',
+        tech: ["ReactJS", "NextJS", "React query", "Zustand", "Tailwind CSS", "Shadcn UI", "WebSocket"],
+        date: '02/2025 - 03/2025',
+    },
+    {
+        name: 'SMB',
+        url: 'https://smbgold.io/',
+        image: '/project/logo/smb.png',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI", "D3Js", "PusherJs"],
+        date: '11/2024 - 01/2025',
+    },
+    {
+        name: 'AFFISO',
+        url: 'https://affiso.vercel.app/',
+        image: '/project/logo/affiso.png',
+        tech: ["ReactJs", "NextJS", "React query", "Zustand", "Tailwinds", "Meshsdk", "PusherJS", 'WebSocket'],
+        date: '12/2024 - 02/2025',
+    },
+    {
+        name: 'VIETHUNGAUTO',
+        url: 'https://sunfil1.com/',
+        image: '/project/logo/viethung.webp',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI"],
+        date: '09/2024 - 03/2025',
+    },
+    {
+        name: 'DATQUANGCHULAI',
+        url: 'https://datquangchulai.com/',
+        image: '/project/logo/datquangchulai.png',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI"],
+        date: '12/2024 - 12/2024',
+    },
+
+    {
+        name: 'ECOSPACE',
+        url: 'https://ecospace.com.vn/',
+        image: '/project/logo/ecospace.png',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI", "PusherJS"],
+        date: '07/2024 - 10/2024',
+    },
+    {
+        name: 'HYPERSPACE',
+        url: 'https://hyperspace-orcin.vercel.app/',
+        image: '/project/logo/hyperspace.svg',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI", "PusherJS"],
+        date: '07/2024 - 10/2024',
+    },
+    {
+        name: 'HAIAU',
+        url: 'https://www.haiaucorp.com/',
+        image: '/project/logo/haiau.png',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI"],
+        date: '06/2024 - 12/2024',
+    },
+    {
         name: 'KANOW',
-        url: 'https://github.com/huytran2000',
-        image: '/project/kanow.png',
-        tech: ['NextJS', 'Tailwind', 'Zustand', 'Shadcn'],
-        date: '02/2024 - 05/2024',
+        url: 'https://kanow.vn/',
+        image: '/project/logo/kanow.ico',
+        tech: ["ReactJs", "NextJs", "Zustand", "Tailwinds", "Shadcn UI", "PusherJs", "Map4D"],
+        date: '02/2024 - 06/2024',
     },
     {
-        name: 'MONY',
-        url: 'https://github.com/huytran2000',
-        image: '/project/mony.png',
-        tech: ['NextJS', 'Tailwind', 'Zustand'],
-        date: '12/2023 - 03/2024',
+        name: 'LIULAB',
+        url: 'https://liulab.edu.vn',
+        image: '/project/logo/liulab.png',
+        tech: ["ReactJs", "NextJs", "Zustand", "Tailwinds", "Radix UI", "D3Js"],
+        date: '11/2023 - 01/2024',
     },
     {
-        name: 'LIULAP',
-        url: 'https://github.com/huytran2000',
-        image: '/project/liulap.jpg',
-        tech: ['NextJS', 'Tailwind', 'RadixUI', 'D3Js'],
-        date: '11/2023 - 02/2024',
+        name: 'MONY-SIMPLE',
+        url: 'https://simple.mony.com.vn',
+        image: '/project/logo/mony.png',
+        tech: ["ReactJs", "NextJs", "Zustand", "React query", "Tailwinds", "Shadcn UI", "PusherJs", "ChartJs"],
+        date: '11/2023 - 01/2024',
     },
-    {
-        name: 'Zen',
-        url: 'https://github.com/huytran2000',
-        image: '/project/zenmi.jpg',
-        tech: ['NextJS', 'Tailwind', 'Redux'],
-        date: '04/2023 - 05/2024',
-    },
+
+
 ]
 
 const SesionProject = ({ className }: { className?: string }) => {
@@ -110,16 +162,16 @@ const SesionProject = ({ className }: { className?: string }) => {
                             key={project.name}
                             className="group relative bg-gray-900 overflow-hidden rounded-xl shadow-xl transition-transform duration-500 hover:-translate-y-2"
                         >
-                            <div className="relative h-60 overflow-hidden">
+                            <div className="relative h-60 overflow-hidden  p-4">
                                 <Image
                                     src={project.image}
                                     width={800}
                                     height={600}
                                     alt={project.name}
-                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40" />
-                                <div className="absolute bottom-3 left-3 flex gap-1">
+                                <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
                                     {project.tech.map((tech) => (
                                         <span key={tech} className="rounded bg-black/70 px-2 py-1 text-xs text-white shadow">
                                             {tech}
