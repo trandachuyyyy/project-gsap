@@ -30,7 +30,7 @@ const projects = [
     },
     {
         name: 'AFFISO',
-        url: 'https://affiso.vercel.app/',
+        url: 'https://affiso.net/',
         image: '/project/logo/affiso.png',
         tech: ["ReactJs", "NextJS", "React query", "Zustand", "Tailwinds", "Meshsdk", "PusherJS", 'WebSocket'],
         date: '12/2024 - 02/2025',
