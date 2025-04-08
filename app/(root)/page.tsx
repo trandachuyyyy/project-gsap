@@ -6,6 +6,7 @@ import SesionProject from './components/SesionProject'
 import SesionSkills from './components/SesionSkills'
 import SesionDetailAbout from './components/SesionDetailAbout'
 import SesionOtherText from './components/SesionOtherText'
+import SectionFalling from './components/SectionFalling'
 
 const Page = () => {
 
@@ -18,6 +19,7 @@ const Page = () => {
             <SesionSkills className='px-8' />
             <SesionProject className='px-8' />
             <SesionAbout className='px-8' />
+            <SectionFalling />
         </div>
     )
 }

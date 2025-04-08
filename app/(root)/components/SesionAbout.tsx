@@ -115,7 +115,11 @@ const SesionAbout = ({ className }: { className?: string }) => {
         'I design and build modern web interfaces with performance in mind.',
         'Creating user experiences that feel smooth, fast, and delightful.',
         'From concept to code, I bring ideas to life with precision.',
+        'Passionate about clean code and scalable architecture.',
+        'Always exploring the latest in web technologies and trends.',
+        'Collaboration and problem-solving are at the heart of my process.',
     ];
+
 
     return (
         <div

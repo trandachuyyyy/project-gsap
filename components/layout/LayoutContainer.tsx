@@ -10,6 +10,7 @@ import IntroSection from "./IntroSection";
 import { useHeader } from "@/hooks/useMenuHeader";
 import MobileMenu from "./MobileMenu";
 import { useResize } from "@/hooks/useResize";
+import ClickSpark from "../animations/ClickSpark";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,6 +125,8 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                 id="viewport"
                 className="relative min-h-screen bg-[#0a0a0a] text-white"
             >
+
+
                 {
                     <MobileMenu />
                 }
