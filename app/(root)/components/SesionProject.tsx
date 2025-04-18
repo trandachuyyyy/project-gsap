@@ -12,7 +12,7 @@ const projects = [
         url: 'https://hub.fmrp.vn/auth/login',
         image: '/project/logo/fmrp.png',
         tech: ["ReactJs", "NextJS", "React query", "Tailwinds", "Ant-Design/Plots", 'D3Js', "Redux", "Firebase"],
-        date: '02/2023 - Present',
+        date: '02/2023 - 04/2025',
     },
     {
         name: 'Zenmi-Ticket',
