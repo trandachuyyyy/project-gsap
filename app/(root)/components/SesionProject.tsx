@@ -29,6 +29,13 @@ const projects = [
         date: '11/2024 - 01/2025',
     },
     {
+        name: 'CAMBOQUICK',
+        url: 'https://beta.camboquick.com/',
+        image: '/project/logo/camboqick.png',
+        tech: ["ReactJs", "NextJs", "React query", "Zustand", "Tailwinds", "Shadcn UI", "PusherJs"],
+        date: '11/2024 - 01/2025',
+    },
+    {
         name: 'AFFISO',
         url: 'https://affiso.net/',
         image: '/project/logo/affiso.png',
@@ -92,7 +99,13 @@ const projects = [
         tech: ["ReactJs", "NextJs", "Zustand", "React query", "Tailwinds", "Shadcn UI", "PusherJs", "ChartJs"],
         date: '11/2023 - 01/2024',
     },
-
+    {
+        name: 'MONY-CLIENT',
+        url: 'https://mony-client.vercel.app/',
+        image: '/project/logo/mony.png',
+        tech: ["ReactJs", "NextJs", "Zustand", "React query", "Tailwinds", "Shadcn UI", "Highcharts"],
+        date: '10/2023',
+    },
 
 ]
 
