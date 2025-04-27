@@ -1,14 +1,10 @@
-import FallingText from '@/components/animations/FallingText'
-import React from 'react'
+import FallingText from "@/components/animations/FallingText";
+import React from "react";
 
 const SectionFalling = () => {
     return (
-        <div
-            id='ss-falling'
-            className={`h-[400px]  flex flex-col items-center justify-center  bg-black text-white `}
-        >
-
-            <div className="max-w-6xl w-full h-full">
+        <div id="ss-falling" className={`h-[400px]  flex flex-col items-center justify-center  bg-black text-white `}>
+            <div className="max-w-7xl w-full h-full">
                 <FallingText
                     text={`Frontend developer with 2 years of experience specializing in building responsive and dynamic applications using React and Next.js.`}
                     highlightWords={["Frontend", "2 years", "React", "Next.js", "responsive", "dynamic"]}
@@ -21,7 +17,7 @@ const SectionFalling = () => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SectionFalling
+export default SectionFalling;

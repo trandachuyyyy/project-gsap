@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+"use client";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,11 +21,11 @@ const SesionAbout = ({ className }: { className?: string }) => {
                 opacity: 1,
                 scale: 1,
                 duration: 1,
-                ease: 'power2.out',
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: titleRef.current,
-                    start: 'top bottom-=120', // 👈 Trigger sớm hơn
-                    toggleActions: 'play none none reverse',
+                    start: "top bottom-=120", // 👈 Trigger sớm hơn
+                    toggleActions: "play none none reverse",
                 },
             }
         );
@@ -38,11 +38,11 @@ const SesionAbout = ({ className }: { className?: string }) => {
                 opacity: 1,
                 y: 0,
                 duration: 1,
-                ease: 'power2.out',
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: subtitleRef.current,
-                    start: 'top bottom-=100', // 👈
-                    toggleActions: 'play none none reverse',
+                    start: "top bottom-=100", // 👈
+                    toggleActions: "play none none reverse",
                 },
             }
         );
@@ -57,17 +57,17 @@ const SesionAbout = ({ className }: { className?: string }) => {
                     opacity: 1,
                     y: 0,
                     duration: 1,
-                    ease: 'power2.out',
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: box,
-                        start: 'top bottom-=80', // 👈 Sớm hơn
-                        toggleActions: 'play none none reverse',
+                        start: "top bottom-=80", // 👈 Sớm hơn
+                        toggleActions: "play none none reverse",
                     },
                 }
             );
 
             // Hover magnetic effect
-            box.addEventListener('mousemove', (e) => {
+            box.addEventListener("mousemove", (e) => {
                 const rect = box.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
@@ -80,14 +80,14 @@ const SesionAbout = ({ className }: { className?: string }) => {
                 });
             });
 
-            box.addEventListener('mouseleave', () => {
+            box.addEventListener("mouseleave", () => {
                 gsap.to(box, {
                     x: 0,
                     y: 0,
                     rotateX: 0,
                     rotateY: 0,
                     duration: 0.4,
-                    ease: 'power2.out',
+                    ease: "power2.out",
                 });
             });
         });
@@ -98,32 +98,30 @@ const SesionAbout = ({ className }: { className?: string }) => {
             { scaleX: 0 },
             {
                 scaleX: 1,
-                transformOrigin: 'left',
+                transformOrigin: "left",
                 duration: 1.5,
-                ease: 'power2.out',
+                ease: "power2.out",
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: 'top bottom-=100', // 👈 Trigger sớm hơn
-                    toggleActions: 'play none none reverse',
+                    start: "top bottom-=100", // 👈 Trigger sớm hơn
+                    toggleActions: "play none none reverse",
                 },
             }
         );
     }, []);
 
-
     const arrayAbout = [
-        'I design and build modern web interfaces with performance in mind.',
-        'Creating user experiences that feel smooth, fast, and delightful.',
-        'From concept to code, I bring ideas to life with precision.',
-        'Passionate about clean code and scalable architecture.',
-        'Always exploring the latest in web technologies and trends.',
-        'Collaboration and problem-solving are at the heart of my process.',
+        "I design and build modern web interfaces with performance in mind.",
+        "Creating user experiences that feel smooth, fast, and delightful.",
+        "From concept to code, I bring ideas to life with precision.",
+        "Passionate about clean code and scalable architecture.",
+        "Always exploring the latest in web technologies and trends.",
+        "Collaboration and problem-solving are at the heart of my process.",
     ];
-
 
     return (
         <div
-            id='ss-about'
+            id="ss-about"
             ref={sectionRef}
             className={`relative min-h-screen py-24 bg-black text-white overflow-hidden ${className}`}
         >
@@ -134,17 +132,11 @@ const SesionAbout = ({ className }: { className?: string }) => {
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02] pointer-events-none" />
 
             {/* Title + subtitle */}
-            <div className="relative z-10 max-w-6xl mx-auto text-center px-6">
-                <h1
-                    ref={titleRef}
-                    className="text-4xl font-extrabold uppercase tracking-wider"
-                >
+            <div className="relative z-10 max-w-7xl mx-auto text-center px-6">
+                <h1 ref={titleRef} className="text-4xl font-extrabold uppercase tracking-wider">
                     About
                 </h1>
-                <h2
-                    ref={subtitleRef}
-                    className="mt-4 text-xl md:text-2xl font-light text-white/80"
-                >
+                <h2 ref={subtitleRef} className="mt-4 text-xl md:text-2xl font-light text-white/80">
                     The story behind the work
                 </h2>
             </div>
@@ -157,9 +149,7 @@ const SesionAbout = ({ className }: { className?: string }) => {
                         ref={(el: any) => (boxesRef.current[index] = el)}
                         className="min-h-[160px] p-6 bg-white/5 border border-white/10 rounded-lg hover:border-white/30 hover:shadow-lg transition-all duration-300"
                     >
-                        <p className="text-white/90 text-base font-light leading-relaxed">
-                            {text}
-                        </p>
+                        <p className="text-white/90 text-base font-light leading-relaxed">{text}</p>
                     </div>
                 ))}
             </div>
