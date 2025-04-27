@@ -169,10 +169,16 @@ const SesionProject = ({ className }: { className?: string }) => {
     }, []);
 
     return (
-        <section id="ss-project" className={`py-16 bg-gradient-to-br from-gray-950 to-black ${className}`}>
+        <section
+            id="ss-project"
+            className={`py-16 bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white ${className}`}
+        >
             <div className="container mx-auto px-4 ">
                 <div className="relative z-10 mx-auto text-center px-6 mb-8">
-                    <h1 ref={titleRef} className="text-4xl font-extrabold uppercase tracking-wider">
+                    <h1
+                        ref={titleRef}
+                        className="text-4xl font-extrabold uppercase tracking-wider dark:text-white text-black"
+                    >
                         My Featured Projects
                     </h1>
                 </div>
@@ -181,7 +187,7 @@ const SesionProject = ({ className }: { className?: string }) => {
                         <div
                             ref={(el: any) => (projectRefs.current[idx] = el)}
                             key={project.name}
-                            className="group relative bg-gray-900 overflow-hidden rounded-xl shadow-xl transition-transform duration-500 hover:-translate-y-2"
+                            className="group relative dark:bg-gray-900 bg-white overflow-hidden rounded-xl shadow-xl transition-transform duration-500 hover:-translate-y-2"
                         >
                             <div className="relative h-60 overflow-hidden  p-4">
                                 <Image
@@ -191,12 +197,12 @@ const SesionProject = ({ className }: { className?: string }) => {
                                     alt={project.name}
                                     className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40" />
+                                <div className="absolute inset-0 bg-gradient-to-t dark:from-black from-gray-400 via-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-40" />
                                 <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
                                     {project.tech.map((tech) => (
                                         <span
                                             key={tech}
-                                            className="rounded bg-black/70 px-2 py-1 text-xs text-white shadow"
+                                            className="rounded dark:bg-black/70 bg-white/70 px-2 py-1 text-xs dark:text-white text-black shadow"
                                         >
                                             {tech}
                                         </span>
@@ -204,8 +210,8 @@ const SesionProject = ({ className }: { className?: string }) => {
                                 </div>
                             </div>
                             <div className="p-4">
-                                <h3 className="text-xl font-semibold text-white">{project.name}</h3>
-                                <p className="mt-1 text-sm text-gray-400">{project.date}</p>
+                                <h3 className="text-xl font-semibold dark:text-white text-black">{project.name}</h3>
+                                <p className="mt-1 text-sm dark:text-gray-400 text-gray-600">{project.date}</p>
                                 <TootipCustom
                                     trigger={
                                         project.url ? (
@@ -236,7 +242,7 @@ const SesionProject = ({ className }: { className?: string }) => {
                                                             <Button
                                                                 variant="outline"
                                                                 size="sm"
-                                                                className="mt-2 border-red-500 text-red-500 hover:bg-red-50"
+                                                                className="mt-2 border-red-500 text-red-500 hover:bg-red-50 dark:text-white dark:bg-black/30"
                                                                 onClick={() => handleScroll("ss-home")}
                                                             >
                                                                 Contact Admin

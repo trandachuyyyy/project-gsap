@@ -123,10 +123,10 @@ const SesionAbout = ({ className }: { className?: string }) => {
         <div
             id="ss-about"
             ref={sectionRef}
-            className={`relative min-h-screen py-24 bg-black text-white overflow-hidden ${className}`}
+            className={`relative min-h-screen py-24 dark:bg-black bg-white dark:text-white text-black overflow-hidden ${className}`}
         >
             {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 opacity-80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br dark:from-zinc-900 dark:via-black dark:to-zinc-900 from-white-900 via-white to-white-900 opacity-80 pointer-events-none" />
 
             {/* Optional grid overlay */}
             <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02] pointer-events-none" />
@@ -136,7 +136,7 @@ const SesionAbout = ({ className }: { className?: string }) => {
                 <h1 ref={titleRef} className="text-4xl font-extrabold uppercase tracking-wider">
                     About
                 </h1>
-                <h2 ref={subtitleRef} className="mt-4 text-xl md:text-2xl font-light text-white/80">
+                <h2 ref={subtitleRef} className="mt-4 text-xl md:text-2xl font-light dark:text-white/80 text-black/80">
                     The story behind the work
                 </h2>
             </div>
@@ -147,9 +147,9 @@ const SesionAbout = ({ className }: { className?: string }) => {
                     <div
                         key={index}
                         ref={(el: any) => (boxesRef.current[index] = el)}
-                        className="min-h-[160px] p-6 bg-white/5 border border-white/10 rounded-lg hover:border-white/30 hover:shadow-lg transition-all duration-300"
+                        className="min-h-[160px] p-6 dark:bg-white/5 bg-black/10 border dark:border-white/10 border-black/10 rounded-lg dark:hover:border-white/30 hover:border-black/30 hover:shadow-lg transition-all duration-300"
                     >
-                        <p className="text-white/90 text-base font-light leading-relaxed">{text}</p>
+                        <p className="dark:text-white/90 text-black/90 text-base font-light leading-relaxed">{text}</p>
                     </div>
                 ))}
             </div>
@@ -157,7 +157,7 @@ const SesionAbout = ({ className }: { className?: string }) => {
             {/* Line */}
             <div
                 ref={lineRef}
-                className="mt-20 h-1 max-w-4xl mx-auto bg-gradient-to-r from-transparent via-white to-transparent scale-x-0"
+                className="mt-20 h-1 max-w-5xl mx-auto bg-gradient-to-r from-transparent dark:via-white via-black to-transparent scale-x-0"
             />
         </div>
     );

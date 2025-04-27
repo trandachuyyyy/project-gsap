@@ -106,7 +106,7 @@ body::-webkit-scrollbar-thumb {
 }
 .container-other {
     padding: 5rem 2rem;
-    background-color: #000;
+    @apply dark:bg-[#000] bg-white;
 }
 
 .text {
@@ -114,16 +114,31 @@ body::-webkit-scrollbar-thumb {
     line-height: 110%;
     margin: 0;
     width: 100%;
-    color: rgba(255, 255, 255, 0.1);
-    background: linear-gradient(to right, #ffffff, #a5f3fc) no-repeat;
+    @apply text-black/30 dark:text-white/30; /* Low opacity white for both modes, adjustable */
+    background: linear-gradient(to right, #60a5fa, #1e40af) no-repeat; /* Dark mode-friendly gradient */
     -webkit-background-clip: text;
     background-clip: text;
     background-size: 0%;
     transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    @apply border-b border-black/20 dark:border-white/20; /* Subtle border for both modes */
     position: relative;
     overflow: hidden;
 }
+// .text {
+//     letter-spacing: -0.02em;
+//     line-height: 110%;
+//     margin: 0;
+//     width: 100%;
+//     color: rgba(255, 255, 255, 0.1);
+//     background: linear-gradient(to right, #ffffff, #a5f3fc) no-repeat;
+//     -webkit-background-clip: text;
+//     background-clip: text;
+//     background-size: 0%;
+//     transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
+//     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+//     position: relative;
+//     overflow: hidden;
+// }
 
 // .container-other {
 //     display: flex;

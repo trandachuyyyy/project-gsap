@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../style/globals.scss";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={inter.className}>
-                <LayoutContainer>{children}</LayoutContainer>
-                <Toaster />
+                <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+                    <LayoutContainer>{children}</LayoutContainer>
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );

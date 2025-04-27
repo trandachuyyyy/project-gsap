@@ -11,6 +11,10 @@ import { useHeader } from "@/hooks/useMenuHeader";
 import MobileMenu from "./MobileMenu";
 import { useResize } from "@/hooks/useResize";
 import ClickSpark from "../animations/ClickSpark";
+import { Button } from "../ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,9 +24,10 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     const viewportRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const splashRef = useRef<any>(null);
-    const { isVisibleMobile, isVisibleTablet } = useResize()
+    const { isVisibleMobile, isVisibleTablet } = useResize();
     const [showSplash, setShowSplash] = useState(true);
-    const { openMenu } = useHeader()
+    const { openMenu } = useHeader();
+    const { setTheme } = useTheme();
 
     useEffect(() => {
         // Đảm bảo splash screen hiển thị ngay từ đầu
@@ -32,11 +37,11 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
         gsap.set(splashRef.current?.querySelector(".name"), {
             autoAlpha: 0,
             y: 100,
-            scale: 0.8
+            scale: 0.8,
         });
         gsap.set(splashRef.current?.querySelector(".title"), {
             autoAlpha: 0,
-            y: 50
+            y: 50,
         });
 
         // Hiệu ứng Splash Screen
@@ -45,35 +50,29 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
             onComplete: () => setShowSplash(false),
         });
 
-        tl.to(
-            splashRef.current?.querySelector(".name"),
-            {
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                duration: 1.5,
-                ease: "power4.out"
-            }
-        )
+        tl.to(splashRef.current?.querySelector(".name"), {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.5,
+            ease: "power4.out",
+        })
             .to(
                 splashRef.current?.querySelector(".title"),
                 {
                     autoAlpha: 1,
                     y: 0,
                     duration: 1.2,
-                    ease: "power3.out"
+                    ease: "power3.out",
                 },
                 "-=0.8"
             )
-            .to(
-                splashRef.current,
-                {
-                    autoAlpha: 0,
-                    duration: 0.8,
-                    ease: "power2.in",
-                    delay: 0.5
-                }
-            );
+            .to(splashRef.current, {
+                autoAlpha: 0,
+                duration: 0.8,
+                ease: "power2.in",
+                delay: 0.5,
+            });
 
         // Hiệu ứng hiển thị content chính
         if (!showSplash) {
@@ -85,10 +84,9 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                         autoAlpha: 1,
                         scale: 1,
                         duration: 1.8,
-                        ease: "power3.out"
+                        ease: "power3.out",
                     }
                 );
-
             }, viewportRef);
             return () => ctx.revert();
         }
@@ -123,19 +121,15 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
             <div
                 ref={viewportRef}
                 id="viewport"
-                className="relative min-h-screen bg-[#0a0a0a] text-white"
+                className="relative min-h-screen dark:bg-[#0a0a0a] bg-white dark:text-white text-black"
             >
-
-
-                {
-                    <MobileMenu />
-                }
+                {<MobileMenu />}
                 <Header />
 
                 {showSplash && (
                     <div
                         ref={splashRef}
-                        className="fixed inset-0 bg-[#0a0a0a] flex flex-col items-center justify-center z-50"
+                        className="fixed inset-0 dark:bg-[#0a0a0a] bg-white flex flex-col items-center justify-center z-50"
                     >
                         <h1
                             className="name text-5xl md:text-7xl font-bold tracking-tight"
@@ -144,7 +138,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                             TRAN DAC HUY
                         </h1>
                         <p
-                            className="title text-xl md:text-2xl mt-4 text-gray-400"
+                            className="title text-xl md:text-2xl mt-4 dark:text-gray-400 text-gray-600"
                             style={{ visibility: "hidden" }} // Ẩn mặc định bằng CSS
                         >
                             FRONTEND DEVELOPER
@@ -156,11 +150,23 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                     <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>
-                {
-                    (!isVisibleMobile || !isVisibleTablet) && <CustomCursor />
-                }
-
-
+                {(!isVisibleMobile || !isVisibleTablet) && <CustomCursor />}
+                <div className="fixed bottom-[20%] right-[1%]">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="outline" size="icon" className="rounded-full">
+                                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                                <span className="sr-only">Toggle theme</span>
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+                            {/* <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem> */}
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             </div>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
@@ -171,8 +177,6 @@ const CustomCursor = () => {
     const isMagnetic = useRef(false);
     const [hasMoved, setHasMoved] = useState(false);
 
-
-
     useEffect(() => {
         const cursor = cursorRef.current;
         gsap.set(cursor, { xPercent: -50, yPercent: -50 });
@@ -181,7 +185,7 @@ const CustomCursor = () => {
             if (!hasMoved) setHasMoved(true);
             const target = e.target as HTMLElement;
 
-            const isNoCursor = target.closest('.no-cursor');
+            const isNoCursor = target.closest(".no-cursor");
             if (isNoCursor) {
                 gsap.to(cursor, { autoAlpha: 0, duration: 0.2 });
                 return;
@@ -192,7 +196,7 @@ const CustomCursor = () => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
 
-            const hoveredMagnetic = target.closest('.magnetic');
+            const hoveredMagnetic = target.closest(".magnetic");
 
             if (hoveredMagnetic) {
                 const bounds = hoveredMagnetic.getBoundingClientRect();
@@ -206,7 +210,7 @@ const CustomCursor = () => {
                     y: centerY,
                     scale: 2.5,
                     duration: 0.3,
-                    ease: 'power3.out',
+                    ease: "power3.out",
                 });
             } else {
                 if (isMagnetic.current) {
@@ -214,7 +218,7 @@ const CustomCursor = () => {
                     gsap.to(cursor, {
                         scale: 1,
                         duration: 0.3,
-                        ease: 'power3.out',
+                        ease: "power3.out",
                     });
                 }
 
@@ -222,16 +226,16 @@ const CustomCursor = () => {
                     x: mouseX,
                     y: mouseY,
                     duration: 0.15,
-                    ease: 'power2.out',
+                    ease: "power2.out",
                 });
             }
         };
 
-        window.addEventListener('mousemove', moveCursor);
+        window.addEventListener("mousemove", moveCursor);
 
         return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            document.body.style.cursor = 'auto';
+            window.removeEventListener("mousemove", moveCursor);
+            document.body.style.cursor = "auto";
         };
     }, []);
 
@@ -243,7 +247,5 @@ const CustomCursor = () => {
         />
     );
 };
-
-
 
 export default LayoutContainer;

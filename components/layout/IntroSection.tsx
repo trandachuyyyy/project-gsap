@@ -40,15 +40,15 @@ const IntroSection = () => {
     };
 
     return (
-        <section id="ss-intro" className="w-full h-screen bg-black text-white flex flex-col items-center justify-center relative z-10">
+        <section
+            id="ss-intro"
+            className="w-full h-screen dark:bg-black bg-white dark:text-white text-black flex flex-col items-center justify-center relative z-10"
+        >
             <div className="intro-text text-3xl font-bold text-center uppercase">
                 <div>Hello</div>
                 <div>You have come to my page</div>
             </div>
-            <button
-                onClick={handleScroll}
-                className="scroll-button mt-10 flex items-center gap-2 text-sm md:text-base"
-            >
+            <button onClick={handleScroll} className="scroll-button mt-10 flex items-center gap-2 text-sm md:text-base">
                 Scroll down <FaAnglesDown />
             </button>
         </section>

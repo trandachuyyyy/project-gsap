@@ -65,6 +65,8 @@ const config: Config = {
                 sm: "calc(var(--radius) - 4px)",
             },
             colors: {
+                "dark-bg": "#1f2937", // Ví dụ: Màu nền tối
+                "dark-text": "#e5e7eb", // Ví dụ: Màu chữ sáng
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 card: {

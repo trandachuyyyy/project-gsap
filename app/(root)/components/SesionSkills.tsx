@@ -348,10 +348,10 @@ const SesionSkills = ({ className }: { className?: string }) => {
         <div
             ref={sectionRef}
             id="ss-skills"
-            className={`relative min-h-screen py-24 bg-black text-white overflow-hidden ${className}`}
+            className={`relative min-h-screen py-24 dark:bg-black bg-white dark:text-white text-black overflow-hidden ${className}`}
         >
             {/* Background match About section */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900 opacity-80 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br dark:from-zinc-900 dark:via-black dark:to-zinc-900 from-white-900 via-white to-white-900 opacity-80 pointer-events-none" />
 
             {/* Title */}
             <div className="relative z-10 max-w-6xl mx-auto text-center px-6">
@@ -369,7 +369,7 @@ const SesionSkills = ({ className }: { className?: string }) => {
                     <div
                         key={index}
                         ref={(el: any) => (skillRefs.current[index] = el)}
-                        className="min-h-[120px] flex items-center justify-center p-4 bg-white/5 border border-white/10 rounded-lg hover:border-white/30 hover:bg-white/10 hover:shadow-lg transition-all duration-300 text-white/90 text-lg font-light cursor-default text-center backdrop-blur-sm"
+                        className="min-h-[120px] flex items-center justify-center p-4 dark:bg-white/5 bg-black/10 border dark:border-white/10 border-black rounded-lg dark:hover:border-white/30 hover:border-black/30 dark:hover:bg-white/10 hover:bg-black/10 hover:shadow-lg transition-all duration-300 dark:text-white/90 text-black text-lg font-light cursor-default text-center backdrop-blur-sm"
                     >
                         {skill}
                     </div>
@@ -379,7 +379,7 @@ const SesionSkills = ({ className }: { className?: string }) => {
             {/* Bottom line like About */}
             <div
                 ref={lineRef}
-                className="mt-20 h-1 max-w-4xl mx-auto bg-gradient-to-r from-transparent via-white to-transparent scale-x-0"
+                className="mt-20 h-1 max-w-5xl mx-auto bg-gradient-to-r from-transparent dark:via-white via-black to-transparent scale-x-0"
             />
         </div>
     );
