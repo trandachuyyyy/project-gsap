@@ -101,6 +101,51 @@ body::-webkit-scrollbar-thumb {
         scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
     }
 }
+
+/* Shimmer effect */
+.experience-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 5;
+    animation: shimmerMove 3s infinite;
+}
+
+.experience-box::after {
+    content: "";
+    position: absolute;
+    border-radius: inherit;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.2),
+        transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.experience-box:hover::after {
+    opacity: 1;
+}
+
+@keyframes shimmerMove {
+    0% {
+        left: -75%;
+    }
+    100% {
+        left: 125%;
+    }
+}
+
 .text-gray-200 {
     -webkit-user-select: none; /* Tắt chức năng copy */
 }

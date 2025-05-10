@@ -8,8 +8,9 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Huy Tran",
-    description: "Huy Tran",
+    title: "Huy Tran – Frontend Developer",
+    description:
+        "Hi, I'm Huy Tran – a frontend developer with 3 years of experience in building modern, responsive web interfaces using React and other cutting-edge technologies.",
     icons: {
         icon: "/profile/huy.jpg",
         shortcut: "/profile/huy.jpg",

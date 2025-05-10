@@ -19,7 +19,7 @@
         "@tanstack/react-query-devtools": "^5.40.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
-        "gsap": "^3.12.5",
+        "gsap": "^3.13.0",
         "lucide-react": "^0.503.0",
         "matter-js": "^0.19.0",
         "next": "14.2.3",
