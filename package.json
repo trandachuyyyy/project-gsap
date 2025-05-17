@@ -14,7 +14,7 @@
         "@radix-ui/react-slot": "^1.2.0",
         "@radix-ui/react-toast": "^1.2.11",
         "@radix-ui/react-tooltip": "^1.2.4",
-        "@react-three/drei": "^9.89.2",
+        "@react-three/drei": "^9.66.3",
         "@react-three/fiber": "^9.1.2",
         "@react-three/postprocessing": "^3.0.4",
         "@studio-freight/lenis": "^1.0.42",
