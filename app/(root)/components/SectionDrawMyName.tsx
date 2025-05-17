@@ -151,7 +151,11 @@ export default function FancyHero() {
 
     return (
         <>
-            <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black font-mono">
+            <section
+                ref={containerRef}
+                id="ss-draw-my-name"
+                className="relative h-screen w-full overflow-hidden bg-black font-mono"
+            >
                 <Image
                     ref={img1Ref}
                     src="/profile/chil.jpg"

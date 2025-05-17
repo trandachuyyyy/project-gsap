@@ -353,7 +353,7 @@ export default function HorizontalScrollingSections() {
     }, []);
 
     return (
-        <div className="relative  overflow-hidden dark:bg-black bg-white dark:text-gray-200">
+        <div id="ss-experience" className="relative  overflow-hidden dark:bg-black bg-white dark:text-gray-200">
             {/* Horizontal scrolling section */}
             <div ref={sectionRef} className="relative overflow-hidden">
                 <div ref={triggerRef} className="h-screen">

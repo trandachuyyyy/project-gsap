@@ -77,7 +77,7 @@ const SesionOtherText = () => {
     }, []);
 
     return (
-        <div ref={containerRef} className="container-other overflow-hidden py-20 dark:bg-black bg-white">
+        <div id="ss-other" ref={containerRef} className="container-other overflow-hidden py-20 dark:bg-black bg-white">
             {texts.map((item, idx) => (
                 <h1 key={idx} className="text lg:text-[120px] text-[60px] uppercase">
                     {item.main}
