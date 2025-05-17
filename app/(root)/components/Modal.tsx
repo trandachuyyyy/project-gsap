@@ -9,15 +9,17 @@ import * as THREE from "three";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ModalCanvas() {
+    const [interactive, setInteractive] = React.useState(false);
+
     return (
-        <Canvas style={{ touchAction: "auto" }} camera={{ position: [0, 0, 5], fov: 50 }}>
+        <Canvas style={{ pointerEvents: interactive ? "auto" : "none" }} camera={{ position: [0, 0, 5], fov: 50 }}>
             <Suspense fallback={null}>
-                <SceneContent />
+                <SceneContent setInteractive={setInteractive} />
             </Suspense>
         </Canvas>
     );
 }
-function SceneContent() {
+function SceneContent({ setInteractive }: any) {
     const orbitRef = useRef<any>(null);
     const { camera } = useThree();
     const gltf = useGLTF("/model/sample.glb");
@@ -67,7 +69,7 @@ function SceneContent() {
 
             onEnter: () => {
                 scene.visible = true;
-
+                setInteractive(true);
                 const start = keyframes[0];
 
                 // Đặt vị trí ban đầu xa hơn bên trái
@@ -86,6 +88,7 @@ function SceneContent() {
 
             onLeaveBack: () => {
                 scene.visible = false;
+                setInteractive(false);
                 if (timelineRef.current) timelineRef.current.seek(0);
             },
         });
