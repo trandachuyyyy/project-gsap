@@ -10,7 +10,7 @@ import SectionFalling from "./components/SectionFalling";
 import dynamic from "next/dynamic";
 import HorizontalScrollingSections from "./components/SectionParallaxSection";
 import SectionDrawMyName from "./components/SectionDrawMyName";
-import ThreeScrollScene from "./components/Profile3DCanvas";
+// import ThreeScrollScene from "./components/Profile3DCanvas";
 // import Modal from "./components/Modal";
 import ModalCanvas from "./components/Modal";
 const DynamicCanvas = dynamic(() => Promise.resolve(ModalCanvas), { ssr: false });
@@ -41,7 +41,7 @@ const Page = () => {
             <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 9999 }}>
                 <DynamicCanvas />
             </div>
-
+            {/* <ThreeScrollScene /> */}
             <SesionHome className="px-8 " />
             <SectionDrawMyName />
             <HorizontalScrollingSections />

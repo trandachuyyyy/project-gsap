@@ -46,24 +46,44 @@ function SceneContent() {
         ScrollTrigger.create({
             trigger: "#ss-draw-my-name",
             start: "top center",
+            // onEnter: () => {
+            //     scene.visible = true;
+
+            //     const start = keyframes[0];
+            //     scene.position.set(...(start.pos as [number, number, number]));
+            //     scene.rotation.set(...(start.rot as [number, number, number]));
+            //     scene.scale.setScalar(start.scl);
+
+            //     // ✅ Animate từ trái sang phải khi vào view
+            //     scene.position.x = start.pos[0] - 1.5;
+            //     gsap.to(scene.position, {
+            //         x: start.pos[0],
+            //         duration: 1.2,
+            //         ease: "power3.out",
+            //     });
+
+            //     if (timelineRef.current) timelineRef.current.seek(0);
+            // },
+
             onEnter: () => {
                 scene.visible = true;
 
                 const start = keyframes[0];
-                scene.position.set(...(start.pos as [number, number, number]));
+
+                // Đặt vị trí ban đầu xa hơn bên trái
+                scene.position.set(start.pos[0] - 5, start.pos[1], start.pos[2]);
                 scene.rotation.set(...(start.rot as [number, number, number]));
                 scene.scale.setScalar(start.scl);
 
-                // ✅ Animate từ trái sang phải khi vào view
-                scene.position.x = start.pos[0] - 1.5;
                 gsap.to(scene.position, {
                     x: start.pos[0],
-                    duration: 1.2,
-                    ease: "power3.out",
+                    duration: 1.5,
+                    ease: "expo.out", // hoặc "power3.out"
                 });
 
                 if (timelineRef.current) timelineRef.current.seek(0);
             },
+
             onLeaveBack: () => {
                 scene.visible = false;
                 if (timelineRef.current) timelineRef.current.seek(0);
