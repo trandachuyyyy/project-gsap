@@ -9,21 +9,20 @@ import * as THREE from "three";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ModalCanvas() {
-    const [interactive, setInteractive] = React.useState(false);
-
     return (
-        <Canvas style={{ pointerEvents: interactive ? "auto" : "none" }} camera={{ position: [0, 0, 5], fov: 50 }}>
+        <Canvas style={{ pointerEvents: "none" }} camera={{ position: [0, 0, 5], fov: 50 }}>
             <Suspense fallback={null}>
-                <SceneContent setInteractive={setInteractive} />
+                <SceneContent />
             </Suspense>
         </Canvas>
     );
 }
-function SceneContent({ setInteractive }: any) {
+function SceneContent() {
     const orbitRef = useRef<any>(null);
     const { camera } = useThree();
     const gltf = useGLTF("/model/sample.glb");
     const texture = useTexture("/model/gltf_embedded_0.png");
+    const [interactive, setInteractive] = React.useState(false);
 
     const userInteracted = useRef(false);
     const timelineRef = useRef<gsap.core.Timeline | null>(null);
