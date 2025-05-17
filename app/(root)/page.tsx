@@ -46,8 +46,8 @@ const Page = () => {
                     width: "100vw",
                     height: "100vh",
                     zIndex: 999,
-                    pointerEvents: "none", // ❗ Cho phép cuộn trang bên dưới
-                    touchAction: "none",
+                    pointerEvents: "none",
+                    touchAction: "auto",
                 }}
             >
                 <DynamicCanvas />
