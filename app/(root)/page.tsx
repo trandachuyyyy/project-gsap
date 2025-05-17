@@ -38,6 +38,20 @@ const Page = () => {
     }, []);
     return (
         <div id="scroll-root" data-hero className="h-full flex flex-col bg-gray-100 ">
+            <div
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    zIndex: 10,
+                    pointerEvents: "none", // ❗ Cho phép cuộn trang bên dưới
+                    touchAction: "none",
+                }}
+            >
+                <DynamicCanvas />
+            </div>
             {/* <ThreeScrollScene /> */}
             <SesionHome className="px-8 " />
             <SectionDrawMyName />

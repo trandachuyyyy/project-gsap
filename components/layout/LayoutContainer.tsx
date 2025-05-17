@@ -268,9 +268,7 @@ import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
-import ModalCanvas from "@/app/(root)/components/Modal";
-const DynamicCanvas = dynamic(() => Promise.resolve(ModalCanvas), { ssr: false });
+
 gsap.registerPlugin(ScrollTrigger);
 
 const queryClient = new QueryClient();
@@ -401,23 +399,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                 )}
                 <div ref={contentRef} id="content" className="opacity-0">
                     <IntroSection />
-                    <main className="relative z-0">
-                        <div
-                            style={{
-                                position: "fixed",
-                                top: 0,
-                                left: 0,
-                                width: "100vw",
-                                height: "100vh",
-                                zIndex: 9999,
-                                pointerEvents: "none", // ❗ Cho phép cuộn trang bên dưới
-                                touchAction: "none",
-                            }}
-                        >
-                            <DynamicCanvas />
-                        </div>
-                        {children}
-                    </main>
+                    <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>
                 {(!isVisibleMobile || !isVisibleTablet) && <CustomCursor />}
