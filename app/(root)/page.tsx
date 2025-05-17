@@ -45,7 +45,7 @@ const Page = () => {
                     left: 0,
                     width: "100vw",
                     height: "100vh",
-                    zIndex: 10,
+                    zIndex: 999,
                     pointerEvents: "none", // ❗ Cho phép cuộn trang bên dưới
                     touchAction: "none",
                 }}
