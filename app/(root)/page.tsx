@@ -19,23 +19,23 @@ import { useRouter } from "next/navigation";
 // const Profile3DCanvas = dynamic(() => import("./components/Profile3DCanvas"), { ssr: false });
 const Page = () => {
     const router = useRouter();
-    useEffect(() => {
-        // Thêm listener để phát hiện khi DevTools được mở hoặc đóng
-        const listener = (isOpen: boolean) => {
-            if (isOpen) {
-                router.push("/myDevTools");
-                // alert("DevTools đã được mở!");
-            }
-        };
+    // useEffect(() => {
+    //     // Thêm listener để phát hiện khi DevTools được mở hoặc đóng
+    //     const listener = (isOpen: boolean) => {
+    //         if (isOpen) {
+    //             router.push("/myDevTools");
+    //             // alert("DevTools đã được mở!");
+    //         }
+    //     };
 
-        addListener(listener);
-        launch(); // Bắt đầu phát hiện
+    //     addListener(listener);
+    //     launch(); // Bắt đầu phát hiện
 
-        return () => {
-            // Dọn dẹp khi component bị hủy
-            removeListener(listener);
-        };
-    }, []);
+    //     return () => {
+    //         // Dọn dẹp khi component bị hủy
+    //         removeListener(listener);
+    //     };
+    // }, []);
     return (
         <div id="scroll-root" data-hero className="h-full flex flex-col bg-gray-100 ">
             <div
