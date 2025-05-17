@@ -10,18 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ModalCanvas() {
     return (
-        <div className="relative w-full h-[100vh] md:h-[80vh]">
-            <Canvas className="absolute inset-0 w-full h-full" camera={{ position: [0, 0, 5], fov: 50 }}>
-                <Suspense fallback={null}>
-                    <SceneContent />
-                </Suspense>
-            </Canvas>
-        </div>
-        // <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        //     <Suspense fallback={null}>
-        //         <SceneContent />
-        //     </Suspense>
-        // </Canvas>
+        <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+            <Suspense fallback={null}>
+                <SceneContent />
+            </Suspense>
+        </Canvas>
     );
 }
 function SceneContent() {
