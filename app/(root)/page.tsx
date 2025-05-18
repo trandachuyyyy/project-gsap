@@ -16,6 +16,7 @@ import ModalCanvas from "./components/Modal";
 const DynamicCanvas = dynamic(() => Promise.resolve(ModalCanvas), { ssr: false });
 import { addListener, launch, removeListener } from "devtools-detector";
 import { useRouter } from "next/navigation";
+import SectionExperience from "./components/SectionExperience";
 // const Profile3DCanvas = dynamic(() => import("./components/Profile3DCanvas"), { ssr: false });
 const Page = () => {
     const router = useRouter();
@@ -38,7 +39,7 @@ const Page = () => {
     // }, []);
     return (
         <div id="scroll-root" data-hero className="h-full flex flex-col bg-gray-100 ">
-            <div
+            {/* <div
                 style={{
                     position: "fixed",
                     top: 0,
@@ -51,9 +52,10 @@ const Page = () => {
                 }}
             >
                 <DynamicCanvas />
-            </div>
+            </div> */}
             {/* <ThreeScrollScene /> */}
             <SesionHome className="px-8 " />
+            <SectionExperience />
             <SectionDrawMyName />
             <HorizontalScrollingSections />
             <SesionOtherText />
