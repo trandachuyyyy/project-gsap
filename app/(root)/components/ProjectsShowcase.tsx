@@ -1,12 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import SesionProject from "./SesionProject";
 import SpiralScrollCards from "./SectionSpiralScrollCards";
 import CanvasScene from "./CanvasScene";
+import { useResize } from "@/hooks/useResize";
 
 const ProjectsShowcase = () => {
-    const [view, setView] = useState<"list" | "spiral">("spiral");
+    const { isVisibleMobile, isVisibleTablet } = useResize();
+    const [view, setView] = useState<"list" | "spiral" | "">("");
     const [transitioning, setTransitioning] = useState(false);
 
     const handleToggle = () => {
@@ -19,13 +21,21 @@ const ProjectsShowcase = () => {
         setTransitioning(false);
     };
 
+    useEffect(() => {
+        if (isVisibleMobile) {
+            setView("list");
+        } else {
+            setView("spiral");
+        }
+    }, [isVisibleMobile, isVisibleTablet]);
+
     return (
         <div
             id="ss-projects"
             className="relative  py-16 bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white"
         >
             {/* Nút chuyển */}
-            <div className="sticky top-1/2 z-50 flex justify-end px-6">
+            <div className="lg:flex sticky top-1/2 z-50 hidden justify-end px-6">
                 <Button onClick={handleToggle} variant="outline">
                     {view === "list" ? "Rotage View" : "List View"}
                 </Button>

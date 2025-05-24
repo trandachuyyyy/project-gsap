@@ -277,7 +277,14 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     const viewportRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const splashRef = useRef<any>(null);
-    const { isVisibleMobile, isVisibleTablet } = useResize();
+    const {
+        isVisibleMobile,
+        isVisibleTablet,
+        onCloseResizeMobile,
+        onCloseResizeTablet,
+        onResizeMobile,
+        onResizeTablet,
+    } = useResize();
     const [showSplash, setShowSplash] = useState(true);
     const { openMenu } = useHeader();
     const { setTheme } = useTheme();
@@ -368,6 +375,34 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
         initLenis();
     }, []);
 
+    useEffect(() => {
+        // Kiểm tra kích thước màn hình và cập nhật trạng thái isVisible
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                // khi đến màn 768 thì bắt đầu thực hiện function
+                onResizeMobile();
+            } else {
+                onCloseResizeMobile();
+            }
+            if (window.innerWidth <= 768) {
+                onResizeTablet();
+            } else {
+                onCloseResizeTablet();
+            }
+        };
+
+        // Gọi hàm handleResize khi kích thước màn hình thay đổi
+        window.addEventListener("resize", handleResize);
+
+        // Gọi hàm handleResize một lần khi component được render
+        handleResize();
+
+        // Hủy lắng nghe sự kiện resize khi component bị unmount
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, [isVisibleMobile, isVisibleTablet, onCloseResizeMobile, onCloseResizeTablet, onResizeMobile, onResizeTablet]);
+
     return (
         <QueryClientProvider client={queryClient}>
             <div
@@ -398,7 +433,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 )}
                 <div ref={contentRef} id="content" className="opacity-0">
-                    {/* <IntroSection /> */}
+                    <IntroSection />
                     <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>

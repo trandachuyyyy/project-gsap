@@ -186,8 +186,9 @@ const SpiralScrollCards = () => {
 
     return (
         <div
-        // id="ss-project"
-        //  className="bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white"
+            className=""
+            // id="ss-project"
+            //  className="bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white"
         >
             <div className="relative z-10 mx-auto text-center px-6 mb-8">
                 <h1 className="text-4xl font-extrabold uppercase tracking-wider dark:text-white text-black">
@@ -243,7 +244,8 @@ const SpiralScrollCards = () => {
                 <div
                     ref={containerRef}
                     style={{ transformStyle: "preserve-3d" }}
-                    className="mx-auto sticky top-0 left-1/2 -translate-x-1/2 w-[500px] h-[600px]"
+                    className="mx-auto sticky top-0 left-1/2 -translate-x-1/2 w-[500px] px-4 sm:px-6 md:px-0 h-[600px]"
+                    // className="mx-auto sticky top-0 left-1/2 -translate-x-1/2 w-[500px] h-[600px]"
                 >
                     {projects.map((project, i) => (
                         <div
