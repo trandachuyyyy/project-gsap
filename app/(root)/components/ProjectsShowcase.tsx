@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import SesionProject from "./SesionProject";
 import SpiralScrollCards from "./SectionSpiralScrollCards";
-import CanvasScene from "./CanvasScene";
+// import CanvasScene from "./CanvasScene";
 import { useResize } from "@/hooks/useResize";
 
 const ProjectsShowcase = () => {
