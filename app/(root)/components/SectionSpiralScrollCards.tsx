@@ -212,14 +212,17 @@ const SpiralScrollCards = () => {
                     }}
                 >
                     <svg style={{ width: "100%", height: "100%" }}>
-                        <line
-                            x1={window.innerWidth / 2}
-                            y1={0}
-                            x2={window.innerWidth / 2}
-                            y2={sectionHeight}
-                            stroke="white"
-                            strokeWidth="2"
-                        />
+                        {typeof window !== "undefined" && (
+                            <line
+                                x1={window.innerWidth / 2}
+                                y1={0}
+                                x2={window.innerWidth / 2}
+                                y2={sectionHeight}
+                                stroke="white"
+                                strokeWidth="2"
+                            />
+                        )}
+
                         {/* <polyline
                             fill="none"
                             stroke="white"
