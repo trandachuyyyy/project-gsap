@@ -1,3 +1,4 @@
+"use client";
 import TootipCustom from "@/components/tooltip/TootipCustom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
