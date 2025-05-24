@@ -6,7 +6,7 @@ import SpiralScrollCards from "./SectionSpiralScrollCards";
 import CanvasScene from "./CanvasScene";
 
 const ProjectsShowcase = () => {
-    const [view, setView] = useState<"list" | "spiral">("list");
+    const [view, setView] = useState<"list" | "spiral">("spiral");
     const [transitioning, setTransitioning] = useState(false);
 
     const handleToggle = () => {
