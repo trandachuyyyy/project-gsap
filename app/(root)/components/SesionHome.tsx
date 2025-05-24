@@ -16,7 +16,25 @@ const SesionHome = ({ className }: { className?: string }) => {
     const textBlockRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // const lenis = new Lenis({ duration: 1.2, easing: (t) => t });
+        // / Tạo Lenis như bạn đang làm
         const lenis = new Lenis({ duration: 1.2, easing: (t) => t });
+
+        ScrollTrigger.scrollerProxy(document.body, {
+            scrollTop(value) {
+                return value !== undefined ? lenis.scrollTo(value, { immediate: true }) : window.scrollY;
+            },
+            getBoundingClientRect() {
+                return {
+                    top: 0,
+                    left: 0,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                };
+            },
+            pinType: document.body.style.transform ? "transform" : "fixed",
+        });
+
         function raf(time: number) {
             lenis.raf(time);
             ScrollTrigger.update();

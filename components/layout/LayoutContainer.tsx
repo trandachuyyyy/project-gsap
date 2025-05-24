@@ -398,7 +398,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 )}
                 <div ref={contentRef} id="content" className="opacity-0">
-                    <IntroSection />
+                    {/* <IntroSection /> */}
                     <main className="relative z-0">{children}</main>
                     <Footer />
                 </div>

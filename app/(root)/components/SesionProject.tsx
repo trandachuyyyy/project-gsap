@@ -170,8 +170,8 @@ const SesionProject = ({ className }: { className?: string }) => {
 
     return (
         <section
-            id="ss-project"
-            className={`py-16 bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white ${className}`}
+        // id="ss-project"
+        // className={`bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white ${className}`}
         >
             <div className="container mx-auto px-4 ">
                 <div className="relative z-10 mx-auto text-center px-6 mb-8">
