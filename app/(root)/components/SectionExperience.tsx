@@ -205,7 +205,7 @@ export default function ExperienceTimeline() {
             </div>
 
             {/* 3D Background */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none">
+            {/* <div className="absolute inset-0 opacity-20 pointer-events-none">
                 <Canvas camera={{ position: [0, 0, 5] }}>
                     <ambientLight intensity={0.5} />
                     <pointLight position={[10, 10, 10]} intensity={1.5} />
@@ -245,7 +245,7 @@ export default function ExperienceTimeline() {
                         </mesh>
                     </Float>
                 </Canvas>
-            </div>
+            </div> */}
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-5xl mx-auto">

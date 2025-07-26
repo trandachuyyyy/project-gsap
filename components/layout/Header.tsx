@@ -60,7 +60,7 @@ const Header = () => {
     }, [isVisible]);
 
     return (
-        <header className="header w-full fixed top-0 left-0 right-0 z-50  px-8 py-4 flex justify-between items-center">
+        <header className="header max-w-7xl fixed w-full left-1/2 top-0 -translate-x-1/2 z-50  px-8 py-4 flex justify-between items-center">
             {/* <header className="header w-full fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl shadow-lg px-8 py-4 flex justify-between items-center"> */}
             <div
                 onClick={() => handleScroll("ss-home")}

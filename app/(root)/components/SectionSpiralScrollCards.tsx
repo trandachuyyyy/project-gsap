@@ -223,14 +223,14 @@ const SpiralScrollCards = () => {
                             />
                         )}
 
-                        {/* <polyline
+                        <polyline
                             fill="none"
                             stroke="white"
                             strokeWidth="2"
                             points={branches
                                 .map((line) => `${line.x2},${line.y2}`) // dùng x2, y2 là vị trí của card
                                 .join(" ")}
-                        /> */}
+                        />
 
                         {branches.map((line, idx) => (
                             <line

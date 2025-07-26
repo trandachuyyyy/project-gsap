@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { FaAnglesDown } from "react-icons/fa6";
 import { gsap } from "gsap";
+import CodeProfile from "@/app/(root)/components/small/CodeProfile";
 
 const IntroSection = () => {
     useEffect(() => {
@@ -44,10 +45,12 @@ const IntroSection = () => {
             id="ss-intro"
             className="w-full h-screen dark:bg-black bg-white dark:text-white text-black flex flex-col items-center justify-center relative z-10"
         >
-            <div className="intro-text text-3xl font-bold text-center uppercase">
+            {/* <div className="intro-text text-3xl font-bold text-center uppercase">
                 <div>Hello</div>
                 <div>You have come to my page</div>
-            </div>
+            </div> */}
+            <CodeProfile />
+
             <button onClick={handleScroll} className="scroll-button mt-10 flex items-center gap-2 text-sm md:text-base">
                 Scroll down <FaAnglesDown />
             </button>
