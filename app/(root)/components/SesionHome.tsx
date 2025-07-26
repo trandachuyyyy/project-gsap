@@ -255,7 +255,7 @@ const SesionHome = ({ className }: { className?: string }) => {
         <div
             ref={sectionRef}
             id="ss-home"
-            className={`relative w-full min-h-[98vh] h-[98vh] overflow-hidden dark:bg-black bg-white dark:text-white  text-black ${className}`}
+            className={`relative w-full min-h-[98vh] h-fit overflow-hidden dark:bg-black bg-white dark:text-white  text-black ${className}`}
         >
             {/* Backgrounds */}
             <div className="absolute inset-0 bg-gradient-to-br dark:from-zinc-900 from-zinc-100 via-white dark:via-black dark:to-zinc-900 to-zinc-100 opacity-80" />
