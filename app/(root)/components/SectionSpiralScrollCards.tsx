@@ -475,6 +475,7 @@ const SpiralScrollCards = () => {
     const [axisEnd, setAxisEnd] = useState(0);
 
     useEffect(() => {
+        if (typeof window == "undefined") return;
         const cards = cardRefs.current;
         const section = sectionRef.current;
         const container = containerRef.current;
@@ -550,7 +551,7 @@ const SpiralScrollCards = () => {
         };
     }, []);
 
-    const totalScrollDistance = projects.length * 200 + window.innerHeight * 2;
+    // const totalScrollDistance = projects.length * 200 + window.innerHeight * 2;
 
     return (
         <div ref={sectionRef} className="relative">
