@@ -239,6 +239,7 @@ export default function HorizontalScrollingSections() {
     // }, []);
 
     useEffect(() => {
+        if (typeof window == "undefined") return;
         const ctx = gsap.context(() => {
             const boxes = gsap.utils.toArray<HTMLElement>(".experience-box");
             const totalWidth = boxes.reduce((acc, box) => acc + box.offsetWidth + 40, 0);
