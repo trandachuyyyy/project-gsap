@@ -409,7 +409,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
             <div
                 ref={viewportRef}
                 id="viewport"
-                className="relative min-h-screen dark:bg-[#0a0a0a] bg-white dark:text-white text-black"
+                className="relative min-h-screen w-screen overflow-hidden dark:bg-[#0a0a0a] bg-white dark:text-white text-black"
             >
                 {<MobileMenu />}
                 <Header />

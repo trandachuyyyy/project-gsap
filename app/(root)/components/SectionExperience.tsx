@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Canvas } from "@react-three/fiber";
-import { Float, Text, OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
-import { Briefcase, GraduationCap, Award, Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+// import { Canvas } from "@react-three/fiber";
+// import { Float, Text, OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Award, Briefcase, GraduationCap } from "lucide-react";
+import { useResize } from "@/hooks/useResize";
 
 export default function ExperienceTimeline() {
     const timelineRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
@@ -171,6 +171,8 @@ export default function ExperienceTimeline() {
             }
         );
 
+        ScrollTrigger.refresh();
+
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -248,12 +250,12 @@ export default function ExperienceTimeline() {
             </div> */}
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-5xl mx-auto">
+                <div className=" mx-auto xl:max-w-4xl">
                     <h2 ref={headingRef} className="text-center mb-20 text-4xl font-extrabold uppercase tracking-wider">
                         My Professional
                     </h2>
 
-                    <div ref={timelineRef} className="relative max-w-4xl mx-auto">
+                    <div ref={timelineRef} className="relative mx-auto">
                         {/* Timeline center line with animated gradient */}
                         <div className="timeline-line absolute left-1/2 top-0 w-0.5 bg-white h-full transform -translate-x-1/2 rounded-full"></div>
 

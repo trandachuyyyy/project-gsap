@@ -7,6 +7,9 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import { handleScroll } from "@/hooks/useHandleScroll";
 import CodeProfile from "./small/CodeProfile";
+import ShimmerButton from "./small/ShimmerButton";
+import AnimatedBadgeView, { AnimatedBadge } from "./small/AnimatedBadge";
+import { CodeIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -255,7 +258,7 @@ const SesionHome = ({ className }: { className?: string }) => {
         <div
             ref={sectionRef}
             id="ss-home"
-            className={`relative w-full min-h-[98vh] h-fit overflow-hidden dark:bg-black bg-white dark:text-white  text-black ${className}`}
+            className={`relative w-full min-h-[98vh] h-full dark:bg-black bg-white dark:text-white  text-black ${className}`}
         >
             {/* Backgrounds */}
             <div className="absolute inset-0 bg-gradient-to-br dark:from-zinc-900 from-zinc-100 via-white dark:via-black dark:to-zinc-900 to-zinc-100 opacity-80" />
@@ -278,7 +281,7 @@ const SesionHome = ({ className }: { className?: string }) => {
             </div>
 
             {/* Main Content Grid */}
-            <div className="relative h-full z-10 grid lg:grid-cols-2 grid-cols-1 items-center max-w-7xl mx-auto py-24 px-6 gap-12">
+            <div className="relative h-full min-h-[98vh] z-10 grid lg:grid-cols-2 grid-cols-1 items-center max-w-7xl mx-auto py-24 xl:px-6 gap-12">
                 {/* Left Avatar + Glow */}
                 <div className="  flex flex-col items-center lg:items-start gap-6">
                     <div className=" no-cursor relative w-[150px] h-[150px] group perspective-1000">
@@ -324,7 +327,7 @@ const SesionHome = ({ className }: { className?: string }) => {
                             create something magical together.
                         </p>
                         <div className="mt-6 flex gap-4 flex-wrap justify-center lg:justify-start">
-                            <button
+                            {/* <button
                                 onClick={() => {
                                     window.open("https://www.facebook.com/trandachuyy", "_blank");
                                 }}
@@ -333,13 +336,25 @@ const SesionHome = ({ className }: { className?: string }) => {
                             >
                                 <span className="relative z-10">Contact Me</span>
                                 <span className="absolute inset-0 bg-gradient-to-r dark:from-white/10 dark:via-white/20 dark:to-white/10 from-black/10 via-black/20 to-black/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />
-                            </button>
-                            <button
+                            </button> */}
+                            <ShimmerButton
+                                title="Contact Me"
+                                onClick={() => {
+                                    window.open("https://www.facebook.com/trandachuyy", "_blank");
+                                }}
+                            />
+                            <AnimatedBadgeView
+                                icon={<CodeIcon />}
+                                title="View Projects"
+                                onClick={() => handleScroll("ss-project")}
+                            />
+
+                            {/* <button
                                 onClick={() => handleScroll("ss-project")}
                                 className=" magnetic px-6 py-2 border dark:border-white/20 border-black/20 dark:hover:border-white/40 hover:border-black/40 rounded-full dark:text-white text-black font-medium transition-all duration-300"
                             >
                                 View Projects
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

@@ -69,11 +69,12 @@ const Page = () => {
             <HorizontalScrollingSections />
             <SesionOtherText />
             <SesionSkills className="px-8" />
-            {/* <SectionSpiralScrollCards /> */}
             <ProjectsShowcase />
-            {/* <SesionProject className="px-8" /> */}
+
             <SesionAbout className="px-8" />
             <SectionFalling />
+            {/* <SectionSpiralScrollCards /> */}
+            {/* <SesionProject className="px-8" /> */}
             {/* <SesionDetailAbout className='px-8' /> */}
         </div>
     );

@@ -35,11 +35,11 @@ const ProjectsShowcase = () => {
             className="relative  py-16 bg-gradient-to-br dark:from-gray-950 from-gray-100 dark:to-black to-white"
         >
             {/* Nút chuyển */}
-            <div className="lg:flex sticky top-1/2 z-50 hidden justify-end px-6">
+            {/* <div className="lg:flex sticky top-1/2 z-50 hidden justify-end px-6">
                 <Button onClick={handleToggle} variant="outline">
                     {view === "list" ? "Rotage View" : "List View"}
                 </Button>
-            </div>
+            </div> */}
 
             {/* Hiệu ứng chuyển cảnh */}
             {/* {transitioning && <CanvasScene onComplete={handleSceneEnd} />} */}
@@ -50,7 +50,9 @@ const ProjectsShowcase = () => {
                     transitioning ? "opacity-0 pointer-events-none" : "opacity-100"
                 }`}
             >
-                {view === "list" ? <SesionProject /> : <SpiralScrollCards />}
+                <SpiralScrollCards />
+                {/* <SesionProject /> */}
+                {/* {view === "list" ? <SesionProject /> : <SpiralScrollCards />} */}
             </div>
         </div>
     );
