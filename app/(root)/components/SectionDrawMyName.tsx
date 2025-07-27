@@ -4,8 +4,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 
-gsap.registerPlugin(ScrollTrigger);
-
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 export default function FancyHero() {
     const containerRef = useRef(null);
     const img1Ref = useRef(null);

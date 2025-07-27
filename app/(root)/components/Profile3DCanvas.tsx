@@ -107,6 +107,7 @@ function Scene() {
 export default function ThreeScrollScene() {
     // Tích hợp với Lenis nếu nó đã được khởi tạo
     useEffect(() => {
+        if (typeof window === "undefined") return;
         // Kiểm tra xem Lenis đã được khởi tạo chưa
         if ((window as any).__lenis) {
             const lenis = (window as any).__lenis;
