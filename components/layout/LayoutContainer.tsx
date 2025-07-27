@@ -376,7 +376,7 @@ const LayoutContainer = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        if (window === undefined) return;
+        if (typeof window == "undefined") return;
         // Kiểm tra kích thước màn hình và cập nhật trạng thái isVisible
         const handleResize = () => {
             if (window.innerWidth < 768) {

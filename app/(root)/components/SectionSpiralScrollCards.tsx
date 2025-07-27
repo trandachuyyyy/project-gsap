@@ -570,14 +570,16 @@ const SpiralScrollCards = () => {
                 {/* SVG Axis */}
                 <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
                     <svg className="w-full h-full">
-                        <line
-                            x1={window.innerWidth / 2}
-                            y1={0}
-                            x2={window.innerWidth / 2}
-                            y2={axisEnd}
-                            stroke="white"
-                            strokeWidth="2"
-                        />
+                        {typeof window !== "undefined" && (
+                            <line
+                                x1={window.innerWidth / 2}
+                                y1={0}
+                                x2={window.innerWidth / 2}
+                                y2={axisEnd}
+                                stroke="white"
+                                strokeWidth="2"
+                            />
+                        )}
                         <polyline
                             fill="none"
                             stroke="white"
