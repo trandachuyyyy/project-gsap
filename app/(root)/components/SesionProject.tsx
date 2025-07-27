@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { handleScroll } from "@/hooks/useHandleScroll";
 import TootipCustom from "@/components/tooltip/TootipCustom";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const projects = [
     {

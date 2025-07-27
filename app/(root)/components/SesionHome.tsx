@@ -11,7 +11,9 @@ import ShimmerButton from "./small/ShimmerButton";
 import AnimatedBadgeView, { AnimatedBadge } from "./small/AnimatedBadge";
 import { CodeIcon } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const SesionHome = ({ className }: { className?: string }) => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -20,6 +22,7 @@ const SesionHome = ({ className }: { className?: string }) => {
     const textBlockRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (typeof window == "undefined") return;
         // const lenis = new Lenis({ duration: 1.2, easing: (t) => t });
         // / Tạo Lenis như bạn đang làm
         const lenis = new Lenis({ duration: 1.2, easing: (t) => t });

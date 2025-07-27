@@ -13,6 +13,7 @@ export default function ExperienceTimeline() {
     const headingRef = useRef<HTMLHeadingElement>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     useEffect(() => {
+        if (typeof window == "undefined") return;
         gsap.registerPlugin(ScrollTrigger);
 
         // Track mouse position for parallax effects
