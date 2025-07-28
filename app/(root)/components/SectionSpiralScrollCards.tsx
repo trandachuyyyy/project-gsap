@@ -476,6 +476,8 @@ const SpiralScrollCards = () => {
 
     useEffect(() => {
         if (typeof window == "undefined") return;
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) return;
         const cards = cardRefs.current;
         const section = sectionRef.current;
         const container = containerRef.current;

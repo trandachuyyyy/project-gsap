@@ -10,6 +10,7 @@ import CodeProfile from "./small/CodeProfile";
 import ShimmerButton from "./small/ShimmerButton";
 import AnimatedBadgeView, { AnimatedBadge } from "./small/AnimatedBadge";
 import { CodeIcon } from "lucide-react";
+import TypewriterText from "./small/TypewriterText";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -313,11 +314,12 @@ const SesionHome = ({ className }: { className?: string }) => {
 
                     <div className=" text-animate text-center lg:text-left" ref={textBlockRef}>
                         <h1 className="text-3xl lg:text-5xl font-bold uppercase tracking-wide flex flex-wrap justify-center lg:justify-start gap-2">
-                            {title.split(" ").map((word, i) => (
+                            {/* {title.split(" ").map((word, i) => (
                                 <span key={i} className="hero-word inline-block">
                                     {word}
                                 </span>
-                            ))}
+                            ))} */}
+                            <TypewriterText text={title} speed={3} deleteSpeed={2} />
                             <div className=" text-4xl animate-wave z-[10]">
                                 <span>👋</span>
                             </div>

@@ -50,8 +50,9 @@ const ProjectsShowcase = () => {
                     transitioning ? "opacity-0 pointer-events-none" : "opacity-100"
                 }`}
             >
-                <SpiralScrollCards />
+                {/* <SpiralScrollCards /> */}
                 {/* <SesionProject /> */}
+                {isVisibleMobile ? <SesionProject /> : <SpiralScrollCards />}
                 {/* {view === "list" ? <SesionProject /> : <SpiralScrollCards />} */}
             </div>
         </div>
