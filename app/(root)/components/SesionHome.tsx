@@ -11,6 +11,7 @@ import ShimmerButton from "./small/ShimmerButton";
 import AnimatedBadgeView, { AnimatedBadge } from "./small/AnimatedBadge";
 import { CodeIcon } from "lucide-react";
 import TypewriterText from "./small/TypewriterText";
+import NexusOrbSup from "./small/NexusOrbSup";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -303,15 +304,14 @@ const SesionHome = ({ className }: { className?: string }) => {
                         />
 
                         <div className="absolute top-0 left-0 w-full h-full rounded-full bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-10 transition-all duration-500" />
-                        {/* <canvas
+                        <canvas
                             ref={canvasRef}
                             className="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"
-                        /> */}
+                        />
                     </div>
                     {/* <p className="dark:text-white/60 text-black/60 text-center lg:text-left text-sm font-light max-w-[280px]">
                         Elevating frontend experience with pixel-perfect design & cinematic motion 🎥
                     </p> */}
-
                     <div className=" text-animate text-center lg:text-left" ref={textBlockRef}>
                         <h1 className="text-3xl lg:text-5xl font-bold uppercase tracking-wide flex flex-wrap justify-center lg:justify-start gap-2">
                             {/* {title.split(" ").map((word, i) => (
