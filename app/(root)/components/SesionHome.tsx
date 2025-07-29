@@ -319,7 +319,7 @@ const SesionHome = ({ className }: { className?: string }) => {
                                     {word}
                                 </span>
                             ))} */}
-                            <TypewriterText text={title} speed={3} deleteSpeed={2} />
+                            <TypewriterText pauseDuration={4000} text={title} speed={10} deleteSpeed={8} />
                             <div className=" text-4xl animate-wave z-[10]">
                                 <span>👋</span>
                             </div>
